@@ -4,677 +4,1342 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sujith Mondithoka — Software Engineer</title>
-<meta name="description" content="Full-Stack Software Engineer. React, TypeScript, Spring Boot. 2+ years delivering enterprise banking features for Standard Bank South Africa.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<meta name="description" content="Sujith Mondithoka — Software Engineer. React, TypeScript, Java, Spring Boot. 5 production banking features. 50,000 daily transactions. Zero lost.">
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --navy:#0A1628;
-  --navy2:#111F3A;
-  --indigo:#4F46E5;
-  --indigo-dim:#3730A3;
-  --indigo-glow:rgba(79,70,229,0.15);
-  --slate:#94A3B8;
-  --slate2:#64748B;
-  --border:#1E2D47;
-  --border2:#243451;
-  --white:#F1F5F9;
-  --white2:#CBD5E1;
-  --green:#10B981;
-  --green-dim:rgba(16,185,129,0.12);
-  --amber:#F59E0B;
-  --sidebar-w:280px;
-  --font:Inter,system-ui,sans-serif;
-  --mono:'JetBrains Mono',monospace;
+  --bg:#070B12; --surface:#0C121D; --raise:#111927;
+  --text:#EDF1F7; --muted:#8A94A6; --dim:#525D70;
+  --blue:#4D7CFE; --blue-hi:#7C9CFF; --gold:#F2B94B; --green:#4ADE80;
+  --line:rgba(237,241,247,.09);
+  --d:"Clash Display",sans-serif; --b:"Satoshi",-apple-system,sans-serif; --m:"JetBrains Mono",monospace;
 }
+*{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:var(--font);background:var(--navy);color:var(--white);font-size:15px;line-height:1.7;-webkit-font-smoothing:antialiased;min-height:100vh;display:flex}
+html,body{background:var(--bg)}
+body{color:var(--text);font-family:var(--b);font-size:16px;line-height:1.65;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+a:focus-visible,button:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--gold);outline-offset:4px;border-radius:4px}
+::selection{background:var(--blue);color:#fff}
 
-/* ── SIDEBAR ── */
-.sidebar{
-  width:var(--sidebar-w);flex-shrink:0;
-  position:fixed;top:0;left:0;height:100vh;
-  background:var(--navy2);
-  border-right:1px solid var(--border);
-  display:flex;flex-direction:column;
-  padding:2.5rem 2rem;
-  z-index:100;overflow-y:auto;
-}
-.sidebar-avatar{
-  width:56px;height:56px;border-radius:14px;
-  background:var(--indigo);
-  display:flex;align-items:center;justify-content:center;
-  font-size:20px;font-weight:600;color:#fff;
-  margin-bottom:1.25rem;letter-spacing:-0.5px;
-  flex-shrink:0;
-}
-.sidebar-name{font-size:17px;font-weight:600;color:var(--white);letter-spacing:-0.4px;line-height:1.3;margin-bottom:4px}
-.sidebar-role{font-size:12px;color:var(--slate);font-family:var(--mono);margin-bottom:1.75rem}
-.status-dot{
-  display:inline-flex;align-items:center;gap:7px;
-  font-size:11.5px;color:var(--green);font-weight:500;
-  background:var(--green-dim);padding:5px 10px;border-radius:20px;
-  margin-bottom:2rem;border:1px solid rgba(16,185,129,0.2);
-}
-.status-dot::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--green);animation:blink 2s infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+/* ================= PRELOADER ================= */
+#loader{position:fixed;inset:0;z-index:100;background:var(--bg);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:18px;transition:transform .8s cubic-bezier(.76,0,.24,1)}
+#loader.done{transform:translateY(-100%)}
+#loader .pct{font-family:var(--d);font-weight:700;font-size:clamp(64px,12vw,140px);line-height:1;font-variant-numeric:tabular-nums}
+#loader .task{font-family:var(--m);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+#loader .bar{width:min(320px,60vw);height:1px;background:var(--line);position:relative;overflow:hidden}
+#loader .bar i{position:absolute;inset:0;background:linear-gradient(90deg,var(--blue),var(--gold));transform:scaleX(0);transform-origin:left;transition:transform .2s}
 
-.nav-label{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--slate2);margin-bottom:.6rem}
-.sidebar-nav{list-style:none;display:flex;flex-direction:column;gap:2px;margin-bottom:2rem}
-.sidebar-nav a{
-  display:flex;align-items:center;gap:10px;
-  font-size:13.5px;color:var(--slate);text-decoration:none;
-  padding:8px 10px;border-radius:8px;transition:all .15s;
-}
-.sidebar-nav a:hover,.sidebar-nav a.active{background:var(--indigo-glow);color:var(--white)}
-.sidebar-nav a .nav-icon{font-size:15px;width:18px;text-align:center;flex-shrink:0}
+/* ================= NAV ================= */
+nav.top{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:22px clamp(20px,4vw,56px);mix-blend-mode:difference}
+nav.top .logo{font-family:var(--d);font-weight:700;font-size:18px;text-decoration:none}
+nav.top .links{display:flex;gap:26px}
+nav.top .links a{font-family:var(--m);font-size:12px;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;opacity:.75;transition:opacity .2s}
+nav.top .links a:hover{opacity:1}
+@media(max-width:700px){nav.top .links{display:none}}
 
-.sidebar-links{margin-top:auto;display:flex;flex-direction:column;gap:8px}
-.social-link{
-  display:flex;align-items:center;gap:9px;
-  font-size:12.5px;color:var(--slate);text-decoration:none;
-  padding:7px 10px;border-radius:8px;transition:all .15s;
-  border:1px solid var(--border);
-}
-.social-link:hover{border-color:var(--indigo);color:var(--white);background:var(--indigo-glow)}
-.social-link svg{width:14px;height:14px;fill:currentColor;flex-shrink:0}
+/* ================= HERO ================= */
+.hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 clamp(20px,4vw,56px) clamp(28px,5vh,56px);overflow:hidden}
+#fieldc{position:absolute;inset:0;width:100%;height:100%;display:block}
+.hero .veil{position:absolute;inset:0;background:radial-gradient(120% 90% at 70% 10%,rgba(7,11,18,0) 0%,rgba(7,11,18,.55) 70%,rgba(7,11,18,.92) 100%),linear-gradient(to bottom,rgba(7,11,18,.25),rgba(7,11,18,0) 30%,rgba(7,11,18,.7) 88%);pointer-events:none}
+.hero-inner{position:relative;z-index:2}
+.hero .tag{font-family:var(--m);font-size:clamp(11px,1.2vw,13px);letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;display:flex;align-items:center;gap:12px}
+.hero .tag::before{content:"";width:34px;height:1px;background:var(--gold)}
+h1.mega{font-family:var(--d);font-weight:700;font-size:clamp(52px,11.5vw,168px);line-height:.92;letter-spacing:-.02em;text-transform:uppercase}
+h1.mega .row{display:block;overflow:hidden}
+h1.mega .row span{display:inline-block;transform:translateY(110%);transition:transform 1s cubic-bezier(.19,1,.22,1)}
+h1.mega .row:nth-child(2) span{transition-delay:.08s;color:transparent;-webkit-text-stroke:1.5px var(--blue-hi)}
+body.ready h1.mega .row span{transform:none}
+.hero-foot{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-top:clamp(22px,4vh,40px);flex-wrap:wrap}
+.hero-foot .sub{max-width:44ch;color:var(--muted);font-size:clamp(15px,1.5vw,17px)}
+.hero-foot .sub b{color:var(--text);font-weight:700}
+#scramble{font-family:var(--m);color:var(--blue-hi);font-size:13px;letter-spacing:.06em;display:block;margin-top:14px;min-height:1.6em}
+.scroll-cue{font-family:var(--m);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);display:flex;align-items:center;gap:10px;white-space:nowrap}
+.scroll-cue i{display:block;width:1px;height:44px;background:linear-gradient(var(--dim),transparent);animation:drip 1.6s ease-in-out infinite}
+@keyframes drip{0%{transform:scaleY(0);transform-origin:top}45%{transform:scaleY(1);transform-origin:top}55%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
 
-/* ── MAIN ── */
-.main{margin-left:var(--sidebar-w);flex:1;min-height:100vh}
+/* ================= MARQUEE ================= */
+.marquee{border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;padding:16px 0;background:var(--surface)}
+.marquee .track{display:flex;width:max-content;animation:mq 26s linear infinite}
+.marquee:hover .track{animation-play-state:paused}
+.marquee span{font-family:var(--d);font-weight:600;font-size:15px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding:0 26px;white-space:nowrap}
+.marquee span b{color:var(--gold);font-weight:600}
+@keyframes mq{to{transform:translateX(-50%)}}
 
-/* ── HERO ── */
-.hero{
-  min-height:100vh;
-  display:flex;align-items:center;
-  padding:5rem 6rem;
-  border-bottom:1px solid var(--border);
-  position:relative;overflow:hidden;
-}
-.hero::before{
-  content:'';position:absolute;top:-200px;right:-200px;
-  width:600px;height:600px;border-radius:50%;
-  background:radial-gradient(circle,rgba(79,70,229,0.08) 0%,transparent 70%);
-  pointer-events:none;
-}
-.hero-inner{max-width:800px}
-.hero-tag{
-  display:inline-flex;align-items:center;gap:8px;
-  font-family:var(--mono);font-size:12px;color:var(--indigo);
-  background:var(--indigo-glow);padding:6px 14px;border-radius:6px;
-  margin-bottom:2rem;border:1px solid rgba(79,70,229,0.25);
-}
-.hero-tag::before{content:'//'}
-h1{
-  font-size:clamp(48px,6vw,80px);font-weight:600;
-  letter-spacing:-3px;line-height:1.05;color:var(--white);
-  margin-bottom:1.5rem;
-}
-h1 .dim{color:var(--slate2)}
-h1 .accent{color:var(--indigo)}
-.hero-sub{
-  font-size:17px;color:var(--slate);line-height:1.75;
-  max-width:620px;margin-bottom:2.5rem;
-}
-.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:4rem}
-.btn-primary{
-  font-size:14px;font-weight:500;
-  background:var(--indigo);color:#fff;
-  padding:11px 24px;border-radius:9px;text-decoration:none;
-  transition:background .15s;letter-spacing:-.2px;
-}
-.btn-primary:hover{background:var(--indigo-dim)}
-.btn-ghost{
-  font-size:14px;font-weight:500;color:var(--white2);
-  padding:10px 24px;border-radius:9px;border:1px solid var(--border2);
-  text-decoration:none;transition:all .15s;
-}
-.btn-ghost:hover{border-color:var(--indigo);color:var(--white);background:var(--indigo-glow)}
+/* ================= SHARED ================= */
+.shell{max-width:1240px;margin:0 auto;padding:0 clamp(20px,4vw,56px)}
+section{padding:clamp(84px,14vh,150px) 0 0}
+.kicker{font-family:var(--m);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.kicker::before{content:"";width:34px;height:1px;background:var(--gold)}
+h2.big{font-family:var(--d);font-weight:600;font-size:clamp(34px,5.4vw,68px);line-height:1.02;letter-spacing:-.015em;max-width:20ch}
+h2.big em{font-style:normal;color:transparent;-webkit-text-stroke:1px var(--blue-hi)}
+.sec-sub{color:var(--muted);max-width:60ch;margin-top:16px;font-size:15.5px}
+.rv{opacity:0;transform:translateY(34px);transition:opacity .9s cubic-bezier(.19,1,.22,1),transform .9s cubic-bezier(.19,1,.22,1)}
+.rv.in{opacity:1;transform:none}
+.rv2{transition-delay:.1s}.rv3{transition-delay:.2s}
 
-/* ── STAT ROW ── */
-.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border)}
-.stat{
-  background:var(--navy2);padding:1.5rem 2rem;
-  display:flex;flex-direction:column;gap:5px;
-}
-.stat-num{
-  font-size:32px;font-weight:600;letter-spacing:-1.5px;
-  color:var(--white);line-height:1;font-family:var(--mono);
-}
-.stat-num .unit{font-size:20px;color:var(--indigo)}
-.stat-label{font-size:12px;color:var(--slate);line-height:1.4}
+/* ================= STATS ================= */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);margin-top:52px}
+.stat{padding:34px 26px 30px;border-left:1px solid var(--line)}
+.stat:first-child{border-left:none;padding-left:0}
+.stat .n{font-family:var(--d);font-weight:700;font-size:clamp(38px,4.6vw,60px);line-height:1;font-variant-numeric:tabular-nums;background:linear-gradient(100deg,var(--text) 30%,var(--blue-hi));-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat .l{font-family:var(--m);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:12px}
+@media(max-width:820px){.stats{grid-template-columns:1fr 1fr}.stat:nth-child(odd){border-left:none;padding-left:0}.stat{border-top:1px solid var(--line)}.stat:nth-child(-n+2){border-top:none}}
 
-/* ── SECTIONS ── */
-.section{padding:5rem 6rem;border-bottom:1px solid var(--border)}
-.section:last-child{border-bottom:none}
-.section-header{display:flex;align-items:center;gap:16px;margin-bottom:3rem}
-.section-num{font-family:var(--mono);font-size:12px;color:var(--indigo);font-weight:500}
-.section-title{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--slate2)}
-.section-line{flex:1;height:1px;background:var(--border)}
+/* ================= WORK GRID ================= */
+.works{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,3vw,34px);margin-top:52px}
+.work{cursor:pointer;border:1px solid var(--line);border-radius:18px;background:var(--surface);padding:16px 16px 20px;transition:transform .35s cubic-bezier(.19,1,.22,1),border-color .35s,box-shadow .35s;position:relative}
+.work:hover{transform:translateY(-6px);border-color:rgba(124,156,255,.5);box-shadow:0 24px 60px rgba(0,0,0,.45)}
+.work .wmeta{display:flex;align-items:baseline;gap:14px;margin-top:16px;flex-wrap:wrap}
+.work .wid{font-family:var(--d);font-weight:700;font-size:15px;color:transparent;-webkit-text-stroke:1px var(--blue-hi)}
+.work h3{font-family:var(--d);font-weight:600;font-size:clamp(19px,2vw,23px);flex:1;min-width:0}
+.work .wmetric{font-family:var(--m);font-size:11px;font-weight:700;letter-spacing:.06em;color:var(--gold);border:1px solid rgba(242,185,75,.4);padding:5px 11px;border-radius:100px;white-space:nowrap}
+.work .wone{color:var(--muted);font-size:14px;margin-top:8px}
+.work .wcta{font-family:var(--m);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--blue-hi);margin-top:12px;display:inline-flex;align-items:center;gap:8px}
+.work .wcta::after{content:"→";transition:transform .3s}
+.work:hover .wcta::after{transform:translateX(5px)}
+@media(max-width:900px){.works{grid-template-columns:1fr}}
 
-/* ── EXPERIENCE ── */
-.exp-block{margin-bottom:3.5rem}
-.exp-block:last-child{margin-bottom:0}
-.exp-meta{
-  display:flex;align-items:flex-start;justify-content:space-between;
-  flex-wrap:wrap;gap:12px;margin-bottom:1.75rem;
-  padding-bottom:1.25rem;border-bottom:1px solid var(--border);
-}
-.exp-co{font-size:22px;font-weight:600;color:var(--white);letter-spacing:-.5px}
-.exp-role{font-size:13.5px;color:var(--slate);margin-top:3px;font-family:var(--mono)}
-.exp-badge{
-  font-size:11.5px;font-weight:500;font-family:var(--mono);
-  color:var(--indigo);background:var(--indigo-glow);
-  padding:5px 12px;border-radius:6px;border:1px solid rgba(79,70,229,0.25);
-  white-space:nowrap;align-self:flex-start;
-}
+/* ================= SIMULATED CLIENT ================= */
+.client{position:relative;border-radius:12px;overflow:hidden;background:#0B1322;border:1px solid rgba(237,241,247,.12);aspect-ratio:16/10;font-family:var(--b)}
+.cbar{height:32px;background:#080E19;display:flex;align-items:center;gap:7px;padding:0 12px;border-bottom:1px solid var(--line)}
+.cbar .d{width:8px;height:8px;border-radius:50%}
+.cbar .d1{background:#F26D5F}.cbar .d2{background:#F2B94B}.cbar .d3{background:#4ADE80}
+.cbar .url{margin-left:6px;flex:1;height:17px;background:#101A2C;border-radius:6px;font:10px/17px var(--m);color:var(--dim);padding:0 10px;letter-spacing:.04em;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.simtag{position:absolute;bottom:8px;right:10px;z-index:6;font:8.5px var(--m);letter-spacing:.14em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(242,185,75,.45);padding:2px 8px;border-radius:100px;background:rgba(7,11,18,.7)}
+.stage{position:absolute;inset:32px 0 0 0;padding:14px;overflow:hidden}
+.client *{will-change:auto}
+/* video-player chrome for film cards */
+.client.video .stage{inset:0 0 24px 0;padding:0}
+.client.video .simtag{bottom:30px}
+.vbar{position:absolute;left:0;right:0;bottom:0;height:24px;background:#080E19;border-top:1px solid var(--line);display:flex;align-items:center;gap:9px;padding:0 10px;z-index:5}
+.vbar .vp{width:0;height:0;border-left:7px solid var(--text);border-top:4.5px solid transparent;border-bottom:4.5px solid transparent}
+.vbar .vprog{flex:1;height:3px;background:rgba(237,241,247,.12);border-radius:100px;overflow:hidden}
+.vbar .vprog i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--blue-hi));width:0;animation:vprog 16s linear infinite}
+@keyframes vprog{to{width:100%}}
+.vbar .vt{font:8.5px var(--m);color:var(--dim)}
+@media(prefers-reduced-motion:reduce){.vbar .vprog i{animation:none;width:100%}}
 
-.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:14px}
-.proj{
-  background:var(--navy2);border:1px solid var(--border);
-  border-radius:14px;padding:1.5rem;
-  transition:border-color .2s;cursor:default;
-}
-.proj:hover{border-color:rgba(79,70,229,0.4)}
-.proj-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:.75rem}
-.proj-name{font-size:14.5px;font-weight:600;color:var(--white);line-height:1.3}
-.proj-type{
-  font-size:10.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
-  padding:3px 8px;border-radius:5px;white-space:nowrap;flex-shrink:0;
-}
-.fe{background:rgba(79,70,229,0.15);color:#818CF8}
-.fs{background:rgba(16,185,129,0.12);color:#34D399}
-.be{background:rgba(245,158,11,0.12);color:#FCD34D}
+/* ---- scene 1: business card — animated film (branch day → home) ---- */
+.client svg{width:100%;height:100%;display:block}
+.v1 text,.v4 text{font-family:var(--m)}
+.v1 .guy,.v4 .guy{transform-box:fill-box}
+.v1 .lg,.v4 .lg{transform-box:fill-box;transform-origin:50% 0}
+.v1 .wipe,.v4 .wipe{transform:translateX(-340px)}
+.v1 .ph{opacity:0}
+.v1 .phA{opacity:1;animation:v1A 16s infinite}
+.v1 .phD{animation:v1D 16s infinite}
+@keyframes v1A{0%,45%{opacity:1}48%,100%{opacity:0}}
+@keyframes v1D{0%,54%{opacity:0}58%,95%{opacity:1}99%,100%{opacity:0}}
+.v1 .wA{animation:v1go 16s infinite}
+@keyframes v1go{0%{transform:translate(-26px,118px)}16%,100%{transform:translate(148px,118px)}}
+.v1 .lgA{animation:v1la 16s infinite}
+.v1 .lgB{animation:v1lb 16s infinite}
+@keyframes v1la{0%{transform:rotate(26deg)}2%{transform:rotate(-26deg)}4%{transform:rotate(26deg)}6%{transform:rotate(-26deg)}8%{transform:rotate(26deg)}10%{transform:rotate(-26deg)}12%{transform:rotate(26deg)}14%{transform:rotate(-26deg)}16%,100%{transform:rotate(0deg)}}
+@keyframes v1lb{0%{transform:rotate(-26deg)}2%{transform:rotate(26deg)}4%{transform:rotate(-26deg)}6%{transform:rotate(26deg)}8%{transform:rotate(-26deg)}10%{transform:rotate(26deg)}12%{transform:rotate(-26deg)}14%{transform:rotate(26deg)}16%,100%{transform:rotate(0deg)}}
+.v1 .tick47{opacity:0;animation:v1t47 16s infinite}
+@keyframes v1t47{0%,17%{opacity:0}20%,45%{opacity:1}48%,100%{opacity:0}}
+.v1 .hand{transform-box:fill-box;transform-origin:50% 100%;animation:v1clk 16s infinite}
+@keyframes v1clk{0%,18%{transform:rotate(0deg)}45%,100%{transform:rotate(1440deg)}}
+.v1 .forms{transform-box:fill-box;transform-origin:50% 100%;opacity:0;animation:v1fm 16s infinite}
+@keyframes v1fm{0%,21%{opacity:0;transform:scale(.6)}24%,45%{opacity:1;transform:scale(1)}48%,100%{opacity:0}}
+.v1 .grr{opacity:0;transform-box:fill-box;animation:v1gr 16s infinite}
+@keyframes v1gr{0%,29%{opacity:0;transform:scale(.5)}32%,36%{opacity:1;transform:scale(1.15)}38%,45%{opacity:1;transform:scale(1)}48%,100%{opacity:0}}
+.v1 .wipe{animation:v1wp 16s infinite}
+@keyframes v1wp{0%,44%{transform:translateX(-340px)}50%{transform:translateX(0)}56%,100%{transform:translateX(340px)}}
+.v1 .mbar{animation:v1mb 16s infinite}
+@keyframes v1mb{0%,58%{width:0}78%,100%{width:40px}}
+.v1 .mchk{opacity:0;transform-box:fill-box;animation:v1ck 16s infinite}
+@keyframes v1ck{0%,79%{opacity:0;transform:scale(.5)}83%,95%{opacity:1;transform:scale(1)}99%,100%{opacity:0}}
+.v1 .pill60{opacity:0;animation:v1p6 16s infinite}
+@keyframes v1p6{0%,83%{opacity:0}87%,95%{opacity:1}99%,100%{opacity:0}}
 
-.proj-desc{font-size:13px;color:var(--slate);line-height:1.65;margin-bottom:1rem}
-.proj-metrics{display:flex;flex-wrap:wrap;gap:7px}
-.metric{
-  font-size:12px;font-family:var(--mono);
-  color:var(--white2);background:rgba(255,255,255,0.04);
-  border:1px solid var(--border2);
-  padding:3px 9px;border-radius:5px;
-}
-.metric b{color:var(--indigo)}
+/* ---- scene 2 film: report logs — month-end crunch → invisible auditor ---- */
+.v2 .ph{opacity:0}
+.v2 .pA{opacity:1;animation:v2A 16s infinite}
+.v2 .pB{animation:v2B 16s infinite}
+@keyframes v2A{0%,38%{opacity:1}42%,100%{opacity:0}}
+@keyframes v2B{0%,42%{opacity:0}46%,96%{opacity:1}100%{opacity:0}}
+.v2 .wipe{transform:translateX(-340px);animation:v2wp 16s infinite}
+@keyframes v2wp{0%,38%{transform:translateX(-340px)}44%{transform:translateX(0)}50%,100%{transform:translateX(340px)}}
+.v2 .stk{transform-box:fill-box;transform-origin:50% 100%}
+.v2 .stk1{animation:v2s1 16s infinite}
+.v2 .stk2{animation:v2s2 16s infinite}
+.v2 .stk3{animation:v2s3 16s infinite}
+@keyframes v2s1{0%,4%{transform:scaleY(.15)}10%,100%{transform:scaleY(1)}}
+@keyframes v2s2{0%,10%{transform:scaleY(.1)}18%,100%{transform:scaleY(1)}}
+@keyframes v2s3{0%,16%{transform:scaleY(.06)}26%,100%{transform:scaleY(1)}}
+.v2 .pg{opacity:0;animation:v2pg 1.1s linear infinite}
+.v2 .pg2{animation-delay:.35s}.v2 .pg3{animation-delay:.7s}
+@keyframes v2pg{0%{opacity:0;transform:translate(0,0)}15%{opacity:1}85%{opacity:1}100%{opacity:0;transform:translate(24px,16px)}}
+.v2 .hand{transform-box:fill-box;transform-origin:50% 100%;animation:v2clk 16s infinite}
+@keyframes v2clk{0%{transform:rotate(0)}38%,100%{transform:rotate(1080deg)}}
+.v2 .grr{opacity:0;transform-box:fill-box;animation:v2gr 16s infinite}
+@keyframes v2gr{0%,24%{opacity:0;transform:scale(.5)}28%,38%{opacity:1;transform:scale(1)}42%,100%{opacity:0}}
+.v2 .chipmv{animation:v2mv 2.6s linear infinite}
+.v2 .chip2{animation-delay:1.3s}
+@keyframes v2mv{0%{transform:translateX(0);opacity:0}8%{opacity:1}66%{opacity:1}74%{opacity:0}100%{transform:translateX(148px);opacity:0}}
+.v2 .ring{transform-box:fill-box;transform-origin:center;animation:v2ring 2.6s infinite}
+@keyframes v2ring{0%,48%{transform:scale(1);opacity:.75}56%{transform:scale(1.28);opacity:1}64%,100%{transform:scale(1);opacity:.75}}
+.v2 .rp1{opacity:0;animation:v2r1 16s infinite}
+.v2 .rp2{opacity:0;animation:v2r2 16s infinite}
+.v2 .rp3{opacity:0;animation:v2r3 16s infinite}
+@keyframes v2r1{0%,56%{opacity:0;transform:translateY(6px)}60%,96%{opacity:1;transform:none}100%{opacity:0}}
+@keyframes v2r2{0%,64%{opacity:0;transform:translateY(6px)}68%,96%{opacity:1;transform:none}100%{opacity:0}}
+@keyframes v2r3{0%,72%{opacity:0;transform:translateY(6px)}76%,96%{opacity:1;transform:none}100%{opacity:0}}
+.v2 .steam{animation:v2st 2s ease-out infinite}
+.v2 .steam2{animation-delay:.7s}
+@keyframes v2st{0%{opacity:0;transform:translateY(0)}30%{opacity:.6}100%{opacity:0;transform:translateY(-9px)}}
+.v2 .zero{opacity:0;animation:v2z 16s infinite}
+@keyframes v2z{0%,80%{opacity:0;transform:translateY(5px)}85%,96%{opacity:1;transform:none}100%{opacity:0}}
 
-/* ── SKILLS ── */
-.skills-layout{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.skill-card{
-  background:var(--navy2);border:1px solid var(--border);
-  border-radius:12px;padding:1.25rem 1.4rem;
-}
-.skill-card-label{
-  font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
-  color:var(--indigo);margin-bottom:.75rem;font-family:var(--mono);
-}
-.tags{display:flex;flex-wrap:wrap;gap:7px}
-.tag{
-  font-size:12.5px;color:var(--slate);
-  background:rgba(255,255,255,.04);border:1px solid var(--border2);
-  padding:4px 10px;border-radius:6px;transition:all .15s;
-}
-.tag:hover{color:var(--white);border-color:var(--indigo);background:var(--indigo-glow)}
+/* ---- scene 3 film: my requests — lost paperwork → one page + timeout save ---- */
+.v3 .ph{opacity:0}
+.v3 .pA{opacity:1;animation:v3A 16s infinite}
+.v3 .pB{animation:v3B 16s infinite}
+@keyframes v3A{0%,22%{opacity:1}27%,100%{opacity:0}}
+@keyframes v3B{0%,27%{opacity:0}32%,97%{opacity:1}100%{opacity:0}}
+.v3 .wipe{transform:translateX(-340px);animation:v3wp 16s infinite}
+@keyframes v3wp{0%,22%{transform:translateX(-340px)}28%{transform:translateX(0)}34%,100%{transform:translateX(340px)}}
+.v3 .fd{transform-box:fill-box;animation:v3fd 2.2s ease-in-out infinite}
+.v3 .fd2{animation-delay:.5s}.v3 .fd3{animation-delay:1s}
+@keyframes v3fd{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+.v3 .grr{opacity:0;transform-box:fill-box;animation:v3gr 16s infinite}
+@keyframes v3gr{0%,8%{opacity:0;transform:scale(.5)}12%,22%{opacity:1;transform:scale(1)}27%,100%{opacity:0}}
+.v3 .ind3{animation:v3ind 16s infinite}
+@keyframes v3ind{0%,32%{transform:translateX(0)}36%,42%{transform:translateX(40px)}46%,52%{transform:translateX(80px)}56%,62%{transform:translateX(120px)}66%,100%{transform:translateX(0)}}
+.v3 .rh1{animation:v3h1 16s infinite}
+.v3 .rh2{animation:v3h2 16s infinite}
+.v3 .rh3{animation:v3h3 16s infinite}
+.v3 .rh4{animation:v3h4 16s infinite}
+@keyframes v3h1{0%,31%{fill:#0E1728}32%,35%{fill:#16233F}38%,100%{fill:#0E1728}}
+@keyframes v3h2{0%,36%{fill:#0E1728}37%,41%{fill:#16233F}44%,100%{fill:#0E1728}}
+@keyframes v3h3{0%,46%{fill:#0E1728}47%,51%{fill:#16233F}54%,100%{fill:#0E1728}}
+@keyframes v3h4{0%,56%{fill:#0E1728}57%,61%{fill:#16233F}64%,100%{fill:#0E1728}}
+.v3 .ping3{opacity:0;animation:v3pi 16s infinite}
+@keyframes v3pi{0%,47%{opacity:0;transform:translateY(4px)}50%,60%{opacity:1;transform:none}64%,100%{opacity:0}}
+.v3 .mod3{opacity:0;animation:v3md 16s infinite}
+@keyframes v3md{0%,68%{opacity:0}71%,86%{opacity:1}89%,100%{opacity:0}}
+.v3 .ptr{opacity:0;animation:v3pt 16s infinite}
+@keyframes v3pt{0%,71%{opacity:0;transform:translate(110px,42px)}74%{opacity:1;transform:translate(110px,42px)}79%,84%{opacity:1;transform:translate(0,0)}87%,100%{opacity:0}}
+.v3 .clik{opacity:0;transform-box:fill-box;transform-origin:center;animation:v3ck 16s infinite}
+@keyframes v3ck{0%,79%{opacity:0;transform:scale(.3)}81%{opacity:.9;transform:scale(1)}84%,100%{opacity:0;transform:scale(1.5)}}
+.v3 .ext3{opacity:0;animation:v3ex 16s infinite}
+@keyframes v3ex{0%,87%{opacity:0}90%,97%{opacity:1}100%{opacity:0}}
 
-/* ── ABOUT ── */
-.about-layout{display:grid;grid-template-columns:1.4fr 1fr;gap:4rem;align-items:start}
-.about-text{font-size:15.5px;color:var(--slate);line-height:1.8}
-.about-text p{margin-bottom:1.1rem}
-.about-text p:last-child{margin-bottom:0}
-.about-text strong{color:var(--white);font-weight:500}
-.fact-list{display:flex;flex-direction:column;gap:10px}
-.fact{
-  background:var(--navy2);border:1px solid var(--border);
-  border-radius:10px;padding:.9rem 1.1rem;
-  display:flex;align-items:flex-start;gap:12px;
-}
-.fact-icon{font-size:17px;flex-shrink:0;margin-top:1px}
-.fact-body{}
-.fact-title{font-size:13.5px;font-weight:500;color:var(--white);line-height:1.3}
-.fact-sub{font-size:12px;color:var(--slate);margin-top:2px;line-height:1.4}
+/* ---- scene 4: recall — animated film (night panic → couch) ---- */
+.v4 .ph{opacity:0}
+.v4 .p1g{opacity:1;animation:v4p1 16s infinite}
+.v4 .p2g{animation:v4p2 16s infinite}
+.v4 .p3g{animation:v4p3 16s infinite}
+.v4 .p5g{animation:v4p5 16s infinite}
+@keyframes v4p1{0%,12%{opacity:1}15%,100%{opacity:0}}
+@keyframes v4p2{0%,13%{opacity:0}15%,32%{opacity:1}35%,100%{opacity:0}}
+@keyframes v4p3{0%,31%{opacity:0}33%,46%{opacity:1}49%,100%{opacity:0}}
+@keyframes v4p5{0%,55%{opacity:0}59%,96%{opacity:1}100%{opacity:0}}
+.v4 .flash{opacity:0;animation:v4fl 16s infinite}
+@keyframes v4fl{0%,3%{opacity:0}4%{opacity:.45}5%{opacity:0}6%{opacity:.45}7%,100%{opacity:0}}
+.v4 .alertg{opacity:0;transform-box:fill-box;animation:v4al 16s infinite}
+@keyframes v4al{0%,2%{transform:scale(.7);opacity:0}4%,12%{transform:scale(1);opacity:1}15%,100%{opacity:0}}
+.v4 .runner{animation:v4run 16s infinite}
+@keyframes v4run{0%,13%{transform:translate(40px,118px)}32%,100%{transform:translate(226px,118px)}}
+.v4 .lean{transform-box:fill-box;transform-origin:50% 100%;animation:v4ln 16s infinite}
+@keyframes v4ln{0%,13%{transform:rotate(0deg)}15%,31%{transform:rotate(10deg)}33%,100%{transform:rotate(0deg)}}
+.v4 .lgA{animation:v4la 16s infinite}
+.v4 .lgB{animation:v4lb 16s infinite}
+@keyframes v4la{0%,13%{transform:rotate(0deg)}14.5%{transform:rotate(34deg)}16%{transform:rotate(-34deg)}17.5%{transform:rotate(34deg)}19%{transform:rotate(-34deg)}20.5%{transform:rotate(34deg)}22%{transform:rotate(-34deg)}23.5%{transform:rotate(34deg)}25%{transform:rotate(-34deg)}26.5%{transform:rotate(34deg)}28%{transform:rotate(-34deg)}29.5%{transform:rotate(34deg)}31%{transform:rotate(-34deg)}32.5%,100%{transform:rotate(0deg)}}
+@keyframes v4lb{0%,13%{transform:rotate(0deg)}14.5%{transform:rotate(-34deg)}16%{transform:rotate(34deg)}17.5%{transform:rotate(-34deg)}19%{transform:rotate(34deg)}20.5%{transform:rotate(-34deg)}22%{transform:rotate(34deg)}23.5%{transform:rotate(-34deg)}25%{transform:rotate(34deg)}26.5%{transform:rotate(-34deg)}28%{transform:rotate(34deg)}29.5%{transform:rotate(-34deg)}31%{transform:rotate(34deg)}32.5%,100%{transform:rotate(0deg)}}
+.v4 .closed{transform-box:fill-box;transform-origin:50% 0;animation:v4cl 16s infinite}
+@keyframes v4cl{0%,33%{transform:rotate(0deg)}36%{transform:rotate(-7deg)}39%{transform:rotate(5deg)}42%,100%{transform:rotate(0deg)}}
+.v4 .slump{transform-box:fill-box;transform-origin:50% 100%;animation:v4sl 16s infinite}
+@keyframes v4sl{0%,34%{transform:translate(238px,118px) rotate(0deg)}40%,46%{transform:translate(238px,118px) rotate(9deg)}49%,100%{transform:translate(238px,118px) rotate(0deg)}}
+.v4 .wipe{animation:v4wp 16s infinite}
+@keyframes v4wp{0%,47%{transform:translateX(-340px)}53%{transform:translateX(0)}59%,100%{transform:translateX(340px)}}
+.v4 .vf{transform-box:fill-box;transform-origin:50% 0;transform:scaleY(0);animation:v4vf 16s infinite}
+@keyframes v4vf{0%,63%{transform:scaleY(0)}80%,96%{transform:scaleY(1)}100%{transform:scaleY(0)}}
+.v4 .d1{animation:v4d1 16s infinite}
+.v4 .d2{animation:v4d2 16s infinite}
+.v4 .d3{animation:v4d3 16s infinite}
+.v4 .d4{animation:v4d4 16s infinite}
+@keyframes v4d1{0%,63%{fill:#0E1728;stroke:#525D70}66%,96%{fill:#4D7CFE;stroke:#7C9CFF}100%{fill:#0E1728;stroke:#525D70}}
+@keyframes v4d2{0%,68%{fill:#0E1728;stroke:#525D70}71%,96%{fill:#4D7CFE;stroke:#7C9CFF}100%{fill:#0E1728;stroke:#525D70}}
+@keyframes v4d3{0%,73%{fill:#0E1728;stroke:#525D70}76%,96%{fill:#4D7CFE;stroke:#7C9CFF}100%{fill:#0E1728;stroke:#525D70}}
+@keyframes v4d4{0%,78%{fill:#0E1728;stroke:#525D70}81%,96%{fill:#4ADE80;stroke:#4ADE80}100%{fill:#0E1728;stroke:#525D70}}
+.v4 .rok{opacity:0;animation:v4ok 16s infinite}
+@keyframes v4ok{0%,82%{opacity:0}86%,96%{opacity:1}100%{opacity:0}}
 
-/* ── CONTACT ── */
-.contact-section{padding:5rem 6rem}
-.contact-inner{
-  background:linear-gradient(135deg,var(--navy2) 0%,rgba(79,70,229,0.08) 100%);
-  border:1px solid var(--border2);border-radius:20px;
-  padding:4rem;text-align:center;
-}
-.contact-inner h2{font-size:36px;font-weight:600;letter-spacing:-1px;color:var(--white);margin-bottom:.5rem}
-.contact-inner p{font-size:15px;color:var(--slate);margin-bottom:2.5rem}
-.contact-grid{display:flex;justify-content:center;flex-wrap:wrap;gap:12px}
-.contact-btn{
-  display:flex;align-items:center;gap:9px;
-  font-size:13.5px;font-weight:500;color:var(--white2);
-  background:rgba(255,255,255,.05);border:1px solid var(--border2);
-  padding:11px 20px;border-radius:10px;text-decoration:none;
-  transition:all .15s;
-}
-.contact-btn:hover{border-color:var(--indigo);color:var(--white);background:var(--indigo-glow)}
-.contact-btn svg{width:16px;height:16px;fill:currentColor;flex-shrink:0}
+/* ---- scene 5 film: notifications — abandoned page 2 → time passes → 1-tap resume ---- */
+.v5 .sky5{animation:v5sky 16s infinite}
+@keyframes v5sky{0%,20%{fill:#14213C}34%,100%{fill:#0B0F22}}
+.v5 .ph{opacity:0}
+.v5 .pA{opacity:1;animation:v5A 16s infinite}
+.v5 .pT{animation:v5T 16s infinite}
+.v5 .pC{animation:v5C 16s infinite}
+@keyframes v5A{0%,20%{opacity:1}24%,100%{opacity:0}}
+@keyframes v5T{0%,22%{opacity:0}26%,34%{opacity:1}38%,100%{opacity:0}}
+@keyframes v5C{0%,36%{opacity:0}40%,97%{opacity:1}100%{opacity:0}}
+.v5 .sun{animation:v5sun 16s infinite}
+@keyframes v5sun{0%,18%{transform:translate(0,0);opacity:1}32%,100%{transform:translate(-46px,58px);opacity:0}}
+.v5 .moon{opacity:0;animation:v5mo 16s infinite}
+@keyframes v5mo{0%,20%{opacity:0;transform:translate(30px,60px)}32%,100%{opacity:1;transform:translate(0,0)}}
+.v5 .star{opacity:0;animation:v5star 16s infinite}
+@keyframes v5star{0%,24%{opacity:0}34%,100%{opacity:.9}}
+.v5 .ringp{transform-box:fill-box;transform-origin:50% 0;animation:v5rg 16s infinite}
+@keyframes v5rg{0%,10%{transform:rotate(0)}11%{transform:rotate(12deg)}12%{transform:rotate(-10deg)}13%{transform:rotate(8deg)}14%{transform:rotate(-6deg)}15%,100%{transform:rotate(0)}}
+.v5 .guyA{animation:v5ga 16s infinite}
+@keyframes v5ga{0%,14%{transform:translateX(0);opacity:1}20%,100%{transform:translateX(70px);opacity:0}}
+.v5 .draft{opacity:0;animation:v5df 16s infinite}
+@keyframes v5df{0%,15%{opacity:0}18%,23%{opacity:1}26%,100%{opacity:0}}
+.v5 .later{opacity:0;animation:v5lt 16s infinite}
+@keyframes v5lt{0%,25%{opacity:0}28%,33%{opacity:1}37%,100%{opacity:0}}
+.v5 .guyC{opacity:0;animation:v5gc 16s infinite}
+@keyframes v5gc{0%,38%{opacity:0;transform:translateX(60px)}43%,100%{opacity:1;transform:translateX(0)}}
+.v5 .bell5{transform-box:fill-box;transform-origin:50% 0;animation:v5bl 16s infinite}
+@keyframes v5bl{0%,45%{transform:rotate(0)}47%{transform:rotate(14deg)}49%{transform:rotate(-11deg)}51%{transform:rotate(6deg)}53%,100%{transform:rotate(0)}}
+.v5 .bdg{opacity:0;transform-box:fill-box;transform-origin:center;animation:v5bd 16s infinite}
+@keyframes v5bd{0%,46%{opacity:0;transform:scale(0)}49%{opacity:1;transform:scale(1.3)}51%,100%{opacity:1;transform:scale(1)}}
+.v5 .pan5{opacity:0;animation:v5pn 16s infinite}
+@keyframes v5pn{0%,50%{opacity:0;transform:translateY(-6px)}54%,66%{opacity:1;transform:none}70%,100%{opacity:0}}
+.v5 .tap{animation:v5tp 16s infinite}
+@keyframes v5tp{0%,58%{fill:#0E1728;stroke:rgba(0,0,0,0)}61%,66%{fill:#1B2440;stroke:#F2B94B}70%,100%{fill:#0E1728;stroke:rgba(0,0,0,0)}}
+.v5 .res{opacity:0;animation:v5rs 16s infinite}
+@keyframes v5rs{0%,68%{opacity:0}72%,96%{opacity:1}100%{opacity:0}}
+.v5 .rbar{animation:v5rb 16s infinite}
+@keyframes v5rb{0%,72%{width:12px}80%,100%{width:19px}}
+.v5 .left5{opacity:0;animation:v5lf 16s infinite}
+@keyframes v5lf{0%,82%{opacity:0}86%,96%{opacity:1}100%{opacity:0}}
 
-.zero-badge{
-  display:inline-flex;align-items:center;gap:8px;
-  font-size:13px;font-weight:500;color:var(--green);
-  background:var(--green-dim);border:1px solid rgba(16,185,129,0.2);
-  padding:8px 16px;border-radius:8px;margin-top:2.5rem;
-  font-family:var(--mono);
-}
-.zero-badge::before{content:'✓  '}
+/* ---- scene 6 film: qkart — 11 PM side project → live shop ---- */
+.v6 .glow{animation:v6gl 3s ease-in-out infinite}
+@keyframes v6gl{0%,100%{opacity:.14}50%{opacity:.24}}
+.v6 .scrA{opacity:1;animation:v6a 16s infinite}
+.v6 .scrB{opacity:0;animation:v6b 16s infinite}
+@keyframes v6a{0%,24%{opacity:1}28%,100%{opacity:0}}
+@keyframes v6b{0%,26%{opacity:0}30%,97%{opacity:1}100%{opacity:0}}
+.v6 .cd1{animation:v6c1 16s infinite}
+.v6 .cd2{animation:v6c2 16s infinite}
+.v6 .cd3{animation:v6c3 16s infinite}
+.v6 .cd4{animation:v6c4 16s infinite}
+@keyframes v6c1{0%,4%{width:0}8%,100%{width:52px}}
+@keyframes v6c2{0%,9%{width:0}13%,100%{width:38px}}
+@keyframes v6c3{0%,14%{width:0}18%,100%{width:60px}}
+@keyframes v6c4{0%,19%{width:0}23%,100%{width:30px}}
+.v6 .steam{animation:v6st 2s ease-out infinite}
+.v6 .steam2{animation-delay:.7s}
+@keyframes v6st{0%{opacity:0;transform:translateY(0)}30%{opacity:.6}100%{opacity:0;transform:translateY(-8px)}}
+.v6 .pk1{opacity:0;animation:v6p1 16s infinite}
+.v6 .pk2{opacity:0;animation:v6p2 16s infinite}
+.v6 .pk3{opacity:0;animation:v6p3 16s infinite}
+@keyframes v6p1{0%,31%{opacity:0;transform:translateY(6px)}35%,95%{opacity:1;transform:none}100%{opacity:0}}
+@keyframes v6p2{0%,35%{opacity:0;transform:translateY(6px)}39%,95%{opacity:1;transform:none}100%{opacity:0}}
+@keyframes v6p3{0%,39%{opacity:0;transform:translateY(6px)}43%,95%{opacity:1;transform:none}100%{opacity:0}}
+.v6 .ptr6{opacity:0;animation:v6pt 16s infinite}
+@keyframes v6pt{0%,45%{opacity:0;transform:translate(70px,34px)}48%{opacity:1;transform:translate(70px,34px)}53%,58%{opacity:1;transform:translate(0,0)}61%,100%{opacity:0}}
+.v6 .clik6{opacity:0;transform-box:fill-box;transform-origin:center;animation:v6ck 16s infinite}
+@keyframes v6ck{0%,53%{opacity:0;transform:scale(.3)}55%{opacity:.9;transform:scale(1)}58%,100%{opacity:0;transform:scale(1.5)}}
+.v6 .fly6{opacity:0;animation:v6fl 16s infinite}
+@keyframes v6fl{0%,55%{opacity:0;transform:translate(-62px,36px)}57%{opacity:1;transform:translate(-62px,36px)}64%{opacity:1;transform:translate(0,0)}66%,100%{opacity:0;transform:translate(0,0)}}
+.v6 .op6{opacity:0;animation:v6op 16s infinite}
+@keyframes v6op{0%,66%{opacity:0;transform:translateY(5px)}70%,82%{opacity:1;transform:none}86%,100%{opacity:0}}
+.v6 .p40{opacity:0;animation:v6p40 16s infinite}
+@keyframes v6p40{0%,76%{opacity:0;transform:translateY(5px)}80%,92%{opacity:1;transform:none}96%,100%{opacity:0}}
+.v6 .liv{opacity:0;animation:v6lv 16s infinite}
+@keyframes v6lv{0%,86%{opacity:0}90%,97%{opacity:1}100%{opacity:0}}
 
-footer{padding:2rem 6rem;font-size:12.5px;color:var(--slate2);font-family:var(--mono);border-top:1px solid var(--border)}
+/* ================= MODAL ================= */
+.modal{position:fixed;inset:0;z-index:80;display:none;align-items:center;justify-content:center;padding:clamp(12px,3vw,32px)}
+.modal.open{display:flex}
+.modal .back{position:absolute;inset:0;background:rgba(4,7,12,.8);backdrop-filter:blur(10px)}
+.mbox{position:relative;width:min(980px,100%);max-height:92vh;overflow:auto;background:linear-gradient(165deg,#0E1626,#0A0F1A);border:1px solid rgba(124,156,255,.28);border-radius:20px;padding:clamp(18px,3vw,34px);animation:mpop .45s cubic-bezier(.19,1,.22,1)}
+@keyframes mpop{from{opacity:0;transform:translateY(26px) scale(.97)}to{opacity:1;transform:none}}
+.mclose{position:sticky;top:0;float:right;z-index:5;width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:rgba(12,18,29,.9);color:var(--text);font-size:16px;cursor:pointer;transition:border-color .2s,color .2s}
+.mclose:hover{border-color:var(--gold);color:var(--gold)}
+.mkick{font-family:var(--m);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.mtitle{font-family:var(--d);font-weight:600;font-size:clamp(24px,3.4vw,38px);line-height:1.08;margin-bottom:6px;max-width:22ch}
+.mmetric{display:inline-flex;align-items:center;gap:9px;font-family:var(--m);font-size:12.5px;font-weight:700;color:var(--gold);border:1px solid rgba(242,185,75,.4);padding:7px 14px;border-radius:100px;margin:10px 0 20px}
+.mmetric::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--gold);box-shadow:0 0 12px var(--gold)}
+.mdemo{margin-bottom:24px}
+.mgrid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:clamp(18px,3vw,34px)}
+.mh{font-family:var(--m);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--blue-hi);margin-bottom:12px}
+.mbul{list-style:none}
+.mbul li{color:var(--muted);font-size:14.5px;padding-left:22px;position:relative;margin-bottom:10px}
+.mbul li::before{content:"→";position:absolute;left:0;color:var(--gold);font-family:var(--m)}
+.mbul li b{color:var(--text);font-weight:700}
+.mstack{display:flex;flex-wrap:wrap;gap:8px}
+.mstack span{font-family:var(--m);font-size:11px;padding:7px 13px;border:1px solid rgba(124,156,255,.35);border-radius:100px;color:var(--text);background:rgba(77,124,254,.08)}
+.mlink{margin-top:22px}
+@media(max-width:760px){.mgrid{grid-template-columns:1fr}}
 
-/* ── RESPONSIVE ── */
-@media(max-width:1100px){
-  .skills-layout{grid-template-columns:repeat(2,1fr)}
-  .stats-row{grid-template-columns:repeat(2,1fr)}
-}
-@media(max-width:900px){
-  :root{--sidebar-w:0px}
-  .sidebar{display:none}
-  .main{margin-left:0}
-  .hero,.section,.contact-section,footer{padding-left:2rem;padding-right:2rem}
-  h1{letter-spacing:-2px}
-  .about-layout{grid-template-columns:1fr}
-  .contact-inner{padding:2.5rem 1.5rem}
-}
-@media(max-width:600px){
-  .hero{padding:4rem 1.5rem;min-height:auto}
-  .section{padding:3rem 1.5rem}
-  .stats-row{grid-template-columns:1fr 1fr}
-  .skills-layout{grid-template-columns:1fr}
-  .projects-grid{grid-template-columns:1fr}
-  .stat-num{font-size:26px}
-}
+/* ================= EXPERIENCE / SKILLS / CONTACT ================= */
+.xp{border-top:1px solid var(--line);margin-top:48px}
+.xp-row{display:grid;grid-template-columns:200px minmax(0,1fr);gap:clamp(18px,3vw,48px);padding:38px 0;border-bottom:1px solid var(--line)}
+.xp-row .when{font-family:var(--m);font-size:13px;color:var(--dim);line-height:1.9}
+.xp-row h3{font-family:var(--d);font-weight:600;font-size:24px}
+.xp-row .org{font-family:var(--m);font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue-hi);margin:6px 0 14px}
+.xp-row p,.xp-row li{color:var(--muted);font-size:15px;max-width:64ch}
+.xp-row ul{list-style:none;margin-top:12px}
+.xp-row li{padding-left:22px;position:relative;margin-bottom:8px}
+.xp-row li::before{content:"→";position:absolute;left:0;color:var(--gold);font-family:var(--m)}
+@media(max-width:820px){.xp-row{grid-template-columns:1fr;gap:8px}}
+
+.skills{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:48px}
+.scell{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:14px;background:var(--surface);padding:26px 24px 28px}
+.scell::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(77,124,254,.16),transparent 60%);left:var(--mx,50%);top:var(--my,50%);transform:translate(-50%,-50%);opacity:0;transition:opacity .3s;pointer-events:none}
+.scell:hover::before{opacity:1}
+.scell h3{font-family:var(--m);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+.scell ul{list-style:none;position:relative;z-index:1}
+.scell li{padding:7px 0;border-bottom:1px dashed rgba(237,241,247,.08);font-size:15px}
+.scell li small{color:var(--dim);font-family:var(--m);font-size:12px;float:right;padding-top:3px}
+@media(max-width:820px){.skills{grid-template-columns:1fr}}
+.edu{margin-top:16px;padding:26px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;align-items:baseline}
+.edu .deg{font-family:var(--d);font-weight:600;font-size:19px}
+.edu .meta{font-family:var(--m);font-size:13px;color:var(--dim)}
+
+.btn{--fill:var(--gold);position:relative;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:var(--m);font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;color:var(--text);border:1px solid rgba(237,241,247,.25);border-radius:100px;padding:15px 28px;transition:color .35s,border-color .35s}
+.btn i{position:absolute;inset:0;background:var(--fill);border-radius:inherit;transform:translateY(101%);transition:transform .45s cubic-bezier(.19,1,.22,1);z-index:0}
+.btn s{position:relative;z-index:1;text-decoration:none}
+.btn:hover{color:#0B0E14;border-color:var(--fill)}
+.btn:hover i{transform:none}
+.btn.blue{--fill:var(--blue-hi)}
+
+.contact{padding-bottom:0}
+.contact .giant{font-family:var(--d);font-weight:700;text-transform:uppercase;font-size:clamp(56px,13vw,190px);line-height:.92;letter-spacing:-.02em;display:block;text-decoration:none;margin-top:30px;color:transparent;-webkit-text-stroke:1.5px rgba(237,241,247,.8);transition:color .5s,-webkit-text-stroke-color .5s}
+.contact .giant:hover{color:var(--gold);-webkit-text-stroke-color:var(--gold)}
+.contact .row{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;margin-top:40px;padding:26px 0 40px;border-top:1px solid var(--line)}
+.contact .row .links{display:flex;gap:24px;flex-wrap:wrap}
+.contact .row a{font-family:var(--m);font-size:13px;letter-spacing:.08em;color:var(--muted);text-decoration:none;transition:color .2s}
+.contact .row a:hover{color:var(--gold)}
+.contact .fine{font-family:var(--m);font-size:11.5px;color:var(--dim)}
+
+/* ================= REDUCED MOTION ================= */
 @media(prefers-reduced-motion:reduce){
-  .status-dot::before{animation:none}
+  html{scroll-behavior:auto}
+  #loader{display:none}
+  h1.mega .row span{transform:none;transition:none}
+  .rv{opacity:1;transform:none;transition:none}
+  .marquee .track,.scroll-cue i{animation:none}
+  .client *,.client *::before,.client *::after{animation:none!important}
+  .btn i{display:none}.btn:hover{color:var(--text)}
+  .mbox{animation:none}
 }
 </style>
 </head>
 <body>
 
-<!-- SIDEBAR -->
-<aside class="sidebar">
-  <div class="sidebar-avatar">SM</div>
-  <div class="sidebar-name">Sujith Mondithoka</div>
-  <div class="sidebar-role">software_engineer.java</div>
-  <div class="status-dot">Open to work</div>
+<div id="loader" aria-hidden="true">
+  <div class="pct" id="pct">0</div>
+  <div class="bar"><i id="bar"></i></div>
+  <div class="task" id="task">clearing 50,000 transactions</div>
+</div>
 
-  <div class="nav-label">Navigation</div>
-  <ul class="sidebar-nav">
-    <li><a href="#experience" class="nav-link"><span class="nav-icon">⚡</span>Experience</a></li>
-    <li><a href="#skills" class="nav-link"><span class="nav-icon">◈</span>Skills</a></li>
-    <li><a href="#about" class="nav-link"><span class="nav-icon">◎</span>About</a></li>
-    <li><a href="#contact" class="nav-link"><span class="nav-icon">→</span>Contact</a></li>
-  </ul>
-
-  <div class="sidebar-links">
-    <a href="mailto:sujithmondithoka070@gmail.com" class="social-link">
-      <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
-      Email
-    </a>
-    <a href="https://linkedin.com/in/sujith-m-a6b888249" target="_blank" rel="noopener" class="social-link">
-      <svg viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
-      LinkedIn
-    </a>
-    <a href="https://github.com/Sujith-Mondithoka" target="_blank" rel="noopener" class="social-link">
-      <svg viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
-      GitHub
-    </a>
-    <a href="tel:+917013976053" class="social-link">
-      <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-      +91 7013976053
-    </a>
+<nav class="top" aria-label="Primary">
+  <a class="logo" href="#top">SM.</a>
+  <div class="links">
+    <a href="#work">Work</a>
+    <a href="#experience">Experience</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact</a>
   </div>
-</aside>
+</nav>
 
-<!-- MAIN -->
-<main class="main">
-
-  <!-- HERO -->
-  <section class="hero" id="home">
-    <div class="hero-inner">
-      <div class="hero-tag">Full-Stack Software Engineer · Hyderabad, India</div>
-      <h1>
-        Sujith<br>
-        <span class="dim">Mondithoka</span>
-      </h1>
-      <p class="hero-sub">
-        2+ years shipping enterprise banking features for <strong>Standard Bank South Africa</strong> 
-        at Zensar Technologies. I build across React, TypeScript, and Spring Boot — 
-        fast interfaces, reliable backends, and zero post-release incidents.
-      </p>
-      <div class="hero-actions">
-        <a href="mailto:sujithmondithoka070@gmail.com" class="btn-primary">Get in touch</a>
-        <a href="https://linkedin.com/in/sujith-m-a6b888249" target="_blank" rel="noopener" class="btn-ghost">View LinkedIn →</a>
-        <a href="https://github.com/Sujith-Mondithoka" target="_blank" rel="noopener" class="btn-ghost">View GitHub →</a>
+<header class="hero" id="top">
+  <canvas id="fieldc" aria-hidden="true"></canvas>
+  <div class="veil"></div>
+  <div class="hero-inner">
+    <p class="tag">Software Engineer · Banking-grade systems</p>
+    <h1 class="mega" aria-label="Sujith Mondithoka">
+      <span class="row"><span>Sujith</span></span>
+      <span class="row"><span>Mondithoka</span></span>
+    </h1>
+    <div class="hero-foot">
+      <div>
+        <p class="sub">Every particle behind this text is one of the <b>50,000 daily transactions</b> my audit system captured for Standard Bank South Africa. <b>Zero lost.</b> Scroll down and watch each feature run.</p>
+        <span id="scramble" aria-hidden="true"></span>
       </div>
-      <div class="zero-badge">Zero critical post-release incidents across all shipped features</div>
+      <div class="scroll-cue"><span>Scroll</span><i></i></div>
+    </div>
+  </div>
+</header>
+
+<div class="marquee" aria-hidden="true">
+  <div class="track" id="mqtrack">
+    <span>React 18 <b>·</b></span><span>TypeScript <b>·</b></span><span>Java <b>·</b></span><span>Spring Boot <b>·</b></span><span>Redux <b>·</b></span><span>PostgreSQL <b>·</b></span><span>Camunda BPMN <b>·</b></span><span>RabbitMQ <b>·</b></span><span>Spring AOP <b>·</b></span><span>Next.js <b>·</b></span>
+  </div>
+</div>
+
+<main>
+  <!-- STATS -->
+  <section class="shell" aria-label="Key results">
+    <p class="kicker rv">Proof, not promises</p>
+    <h2 class="big rv rv2">Numbers a bank <em>signed off on.</em></h2>
+    <div class="stats rv rv3">
+      <div class="stat"><div class="n" data-count="50" data-suffix="K+">0</div><div class="l">Daily txns audited</div></div>
+      <div class="stat"><div class="n" data-count="60" data-suffix="%">0</div><div class="l">Faster card processing</div></div>
+      <div class="stat"><div class="n" data-count="88" data-prefix="62→">0</div><div class="l">Lighthouse score</div></div>
+      <div class="stat"><div class="n" data-count="10" data-suffix="K+">0</div><div class="l">Corporate clients</div></div>
     </div>
   </section>
 
-  <!-- STATS -->
-  <div class="stats-row">
-    <div class="stat">
-      <div class="stat-num"><span class="counter" data-target="10000">0</span><span class="unit">+</span></div>
-      <div class="stat-label">Enterprise banking users served</div>
+  <!-- WORK -->
+  <section class="shell" id="work" aria-label="Selected work">
+    <p class="kicker rv">Selected work — watch them run</p>
+    <h2 class="big rv rv2">The real product is under NDA. <em>So I rebuilt it.</em></h2>
+    <p class="sec-sub rv rv3">Banking software can't be screen-recorded — so I animated it. Six short films, one per feature, every frame hand-coded. Click any card for the full case study.</p>
+
+    <div class="works">
+      <!-- 01 BUSINESS CARD -->
+      <article class="work rv" tabindex="0" role="button" aria-haspopup="dialog" data-modal="bizcard" aria-label="Open case study: Business Card onboarding">
+        <div class="client video">
+          <div class="vbar"><span class="vp"></span><span class="vprog"><i></i></span><span class="vt">0:16</span></div>
+          <div class="stage"><svg class="v1" viewBox="0 0 320 180" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="0" y="150" width="320" height="30" fill="#0E1728"/>
+            <g class="ph phA">
+              <text x="10" y="16" fill="#F26D5F" font-size="8" letter-spacing="2" font-weight="700">MONDAY 9:04 AM — THE OLD WAY</text>
+              <polygon points="205,72 301,72 253,48" fill="#101A2C" stroke="rgba(237,241,247,.12)"/>
+              <rect x="210" y="72" width="86" height="78" fill="#101A2C" stroke="rgba(237,241,247,.12)"/>
+              <rect x="218" y="88" width="8" height="62" fill="#1B2A47"/><rect x="240" y="88" width="8" height="62" fill="#1B2A47"/><rect x="262" y="88" width="8" height="62" fill="#1B2A47"/><rect x="284" y="88" width="8" height="62" fill="#1B2A47"/>
+              <text x="253" y="66" fill="#8A94A6" font-size="9" text-anchor="middle" letter-spacing="3">BANK</text>
+              <g fill="#525D70">
+                <circle cx="176" cy="118" r="5"/><rect x="172" y="124" width="8" height="16" rx="3"/>
+                <circle cx="190" cy="118" r="5"/><rect x="186" y="124" width="8" height="16" rx="3"/>
+                <circle cx="204" cy="118" r="5"/><rect x="200" y="124" width="8" height="16" rx="3"/>
+              </g>
+              <circle cx="160" cy="34" r="11" fill="none" stroke="#8A94A6" stroke-width="1.5"/>
+              <rect class="hand" x="159.25" y="26" width="1.5" height="8" fill="#F2B94B"/>
+              <g class="forms">
+                <rect x="118" y="128" width="18" height="22" fill="#C9D2E0" transform="rotate(-6 127 139)"/>
+                <rect x="123" y="126" width="18" height="24" fill="#EDF1F7"/>
+                <text x="132" y="162" fill="#F2B94B" font-size="7.5" text-anchor="middle" font-weight="700">14 FORMS</text>
+              </g>
+              <g class="wA"><g class="guy">
+                <text class="tick47" x="0" y="-42" fill="#F2B94B" font-size="8" text-anchor="middle" font-weight="700">TOKEN #47</text>
+                <g class="grr"><text x="9" y="-34" fill="#F26D5F" font-size="12" font-weight="700">!!</text></g>
+                <circle cx="0" cy="-27" r="6.5" fill="#EDF1F7"/>
+                <rect x="-5.5" y="-21" width="11" height="19" rx="4.5" fill="#4D7CFE"/>
+                <g class="lg lgA"><rect x="-4.5" y="-3" width="3.6" height="15" rx="1.8" fill="#8A94A6"/></g>
+                <g class="lg lgB"><rect x="1" y="-3" width="3.6" height="15" rx="1.8" fill="#8A94A6"/></g>
+              </g></g>
+            </g>
+            <g class="ph phD">
+              <text x="10" y="16" fill="#7C9CFF" font-size="8" letter-spacing="2" font-weight="700">SAME REQUEST — THE SERVICE ONLINE WAY</text>
+              <rect x="56" y="118" width="96" height="5" rx="2" fill="#1B2A47"/>
+              <rect x="62" y="123" width="5" height="27" fill="#1B2A47"/><rect x="141" y="123" width="5" height="27" fill="#1B2A47"/>
+              <rect x="76" y="76" width="56" height="38" rx="4" fill="#0A1220" stroke="#4D7CFE"/>
+              <rect x="82" y="84" width="44" height="4" rx="2" fill="#101A2C"/>
+              <rect class="mbar" x="82" y="84" width="0" height="4" rx="2" fill="#7C9CFF"/>
+              <rect x="82" y="93" width="30" height="3" rx="1.5" fill="#101A2C"/>
+              <rect x="82" y="100" width="38" height="3" rx="1.5" fill="#101A2C"/>
+              <g class="mchk"><circle cx="104" cy="96" r="10" fill="rgba(74,222,128,.15)" stroke="#4ADE80"/><path d="M99 96l4 4 7-8" fill="none" stroke="#4ADE80" stroke-width="2" stroke-linecap="round"/></g>
+              <rect x="100" y="114" width="8" height="5" fill="#1B2A47"/>
+              <g class="guy" transform="translate(172,116)">
+                <circle cx="0" cy="-26" r="6.5" fill="#EDF1F7"/>
+                <rect x="-5.5" y="-20" width="11" height="18" rx="4.5" fill="#4D7CFE"/>
+                <rect x="-15" y="-12" width="12" height="3.4" rx="1.7" fill="#8A94A6"/>
+                <rect x="-4" y="-3" width="3.6" height="13" rx="1.8" fill="#8A94A6"/>
+                <rect x="-4" y="8" width="11" height="3.4" rx="1.7" fill="#8A94A6"/>
+                <rect x="8" y="-6" width="14" height="4" rx="2" fill="#1B2440"/><rect x="18" y="-4" width="4" height="18" fill="#1B2440"/>
+              </g>
+              <g class="pill60">
+                <rect x="192" y="66" width="112" height="18" rx="9" fill="rgba(242,185,75,.12)" stroke="rgba(242,185,75,.5)"/>
+                <text x="248" y="78" fill="#F2B94B" font-size="8" text-anchor="middle" font-weight="700">PROCESSING TIME −60%</text>
+              </g>
+              <g class="mchk"><text x="104" y="130" fill="#4ADE80" font-size="7.5" text-anchor="middle" font-weight="700">APPROVED · CAMUNDA</text></g>
+            </g>
+            <g class="wipe">
+              <rect x="0" y="0" width="340" height="180" fill="#4D7CFE"/>
+              <text x="170" y="94" fill="#070B12" font-size="13" font-weight="700" text-anchor="middle" letter-spacing="4">SERVICE ONLINE</text>
+            </g>
+          </svg></div>
+          <span class="simtag">Illustrative recreation</span>
+        </div>
+        <div class="wmeta"><span class="wid">01</span><h3>Business Card</h3><span class="wmetric">−60% processing time</span></div>
+        <p class="wone">Token #47 and 14 paper forms — or a digital wizard that ends in "Approved."</p>
+        <span class="wcta">Full case study</span>
+      </article>
+
+      <!-- 02 REPORT LOGS -->
+      <article class="work rv" tabindex="0" role="button" aria-haspopup="dialog" data-modal="audit" aria-label="Open case study: Report Logs audit engine">
+        <div class="client video">
+          <div class="vbar"><span class="vp"></span><span class="vprog"><i></i></span><span class="vt">0:16</span></div>
+          <div class="stage"><svg class="v2" viewBox="0 0 320 180" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect width="320" height="180" fill="#0C1226"/>
+            <rect y="150" width="320" height="30" fill="#0A0F1E"/>
+            <g class="ph pA">
+              <text x="10" y="16" fill="#F8A79C" font-size="8" letter-spacing="2" font-weight="700">MONTH-END — 1,000 REPORTS DUE</text>
+              <circle cx="42" cy="40" r="11" fill="none" stroke="#8A94A6" stroke-width="1.5"/>
+              <rect class="hand" x="41.25" y="32" width="1.5" height="8" fill="#F2B94B"/>
+              <rect x="30" y="122" width="104" height="5" fill="#1B2A47"/>
+              <rect x="36" y="127" width="5" height="23" fill="#1B2A47"/><rect x="122" y="127" width="5" height="23" fill="#1B2A47"/>
+              <g transform="translate(58,134)">
+                <circle cx="0" cy="-26" r="6.5" fill="#EDF1F7"/>
+                <rect x="-5.5" y="-20" width="11" height="18" rx="4.5" fill="#4D7CFE"/>
+                <rect x="-2" y="-11" width="13" height="3.4" rx="1.7" fill="#8A94A6"/>
+                <g class="grr"><text x="4" y="-36" fill="#F26D5F" font-size="12" font-weight="700">!!</text></g>
+              </g>
+              <g class="stk stk1"><rect x="146" y="98" width="26" height="52" fill="#D8DEE9"/><path d="M146 106h26M146 116h26M146 126h26M146 136h26" stroke="#9AA6BC" stroke-width="1"/></g>
+              <g class="stk stk2"><rect x="178" y="86" width="26" height="64" fill="#D8DEE9"/><path d="M178 96h26M178 108h26M178 120h26M178 132h26" stroke="#9AA6BC" stroke-width="1"/></g>
+              <g class="stk stk3"><rect x="210" y="74" width="26" height="76" fill="#D8DEE9"/><path d="M210 86h26M210 100h26M210 114h26M210 128h26" stroke="#9AA6BC" stroke-width="1"/></g>
+              <rect x="252" y="128" width="44" height="22" rx="3" fill="#101A2C" stroke="rgba(237,241,247,.18)"/>
+              <rect x="258" y="124" width="32" height="4" fill="#080D1A"/>
+              <g class="pg"><rect x="260" y="112" width="14" height="10" fill="#EDF1F7"/></g>
+              <g class="pg pg2"><rect x="260" y="112" width="14" height="10" fill="#EDF1F7"/></g>
+              <g class="pg pg3"><rect x="260" y="112" width="14" height="10" fill="#EDF1F7"/></g>
+              <text x="274" y="164" fill="#8A94A6" font-size="6.5" text-anchor="middle">PRINTER, ALL DAY</text>
+            </g>
+            <g class="ph pB">
+              <text x="10" y="16" fill="#7C9CFF" font-size="8" letter-spacing="2" font-weight="700">THE AOP AUDIT ENGINE — RUNNING SILENTLY</text>
+              <text x="310" y="34" fill="#F2B94B" font-size="8" text-anchor="end" font-weight="700">TXNS TODAY: <tspan class="j-audit">49,213</tspan></text>
+              <line x1="18" y1="98" x2="204" y2="98" stroke="rgba(237,241,247,.18)" stroke-width="1.5" stroke-dasharray="3 4"/>
+              <g class="chipmv"><rect x="18" y="90" width="60" height="15" rx="7" fill="#101A2C" stroke="#4D7CFE"/><text x="48" y="100" fill="#7C9CFF" font-size="6.5" text-anchor="middle">GET /download</text></g>
+              <g class="chipmv chip2"><rect x="18" y="90" width="60" height="15" rx="7" fill="#101A2C" stroke="#4D7CFE"/><text x="48" y="100" fill="#7C9CFF" font-size="6.5" text-anchor="middle">POST /email</text></g>
+              <circle class="ring" cx="132" cy="98" r="14" fill="none" stroke="#F2B94B" stroke-width="2"/>
+              <text x="132" y="76" fill="#F2B94B" font-size="7.5" text-anchor="middle" font-weight="700">@Aspect</text>
+              <ellipse cx="228" cy="86" rx="26" ry="7" fill="#0E1728" stroke="#4ADE80"/>
+              <rect x="202" y="86" width="52" height="36" fill="#0E1728"/>
+              <line x1="202" y1="86" x2="202" y2="122" stroke="#4ADE80"/><line x1="254" y1="86" x2="254" y2="122" stroke="#4ADE80"/>
+              <ellipse cx="228" cy="122" rx="26" ry="7" fill="#0E1728" stroke="#4ADE80"/>
+              <text x="228" y="142" fill="#4ADE80" font-size="6.5" text-anchor="middle">PostgreSQL</text>
+              <g class="rp1"><rect x="276" y="118" width="22" height="28" fill="#EDF1F7"/><path d="M280 124h14M280 130h14M280 136h10" stroke="#9AA6BC"/></g>
+              <g class="rp2"><rect x="272" y="112" width="22" height="28" fill="#EDF1F7"/><path d="M276 118h14M276 124h14M276 130h10" stroke="#9AA6BC"/></g>
+              <g class="rp3"><rect x="268" y="106" width="22" height="28" fill="#EDF1F7"/><path d="M272 112h14M272 118h14M272 124h10" stroke="#9AA6BC"/></g>
+              <text x="284" y="158" fill="#F2B94B" font-size="6.5" text-anchor="middle" font-weight="700">1,000+/MO · JASPER</text>
+              <g transform="translate(46,134)">
+                <circle cx="0" cy="-26" r="6.5" fill="#EDF1F7"/>
+                <rect x="-5.5" y="-20" width="11" height="18" rx="4.5" fill="#4D7CFE"/>
+                <rect x="8" y="-10" width="7" height="8" rx="1.5" fill="#F2B94B"/>
+                <path class="steam" d="M10 -14 q2 -3 0 -6" stroke="#8A94A6" fill="none" stroke-width="1.2"/>
+                <path class="steam steam2" d="M14 -14 q-2 -3 0 -6" stroke="#8A94A6" fill="none" stroke-width="1.2"/>
+              </g>
+              <text x="46" y="160" fill="#8A94A6" font-size="6.5" text-anchor="middle">SAME ENGINEER, MONTH-END</text>
+              <g class="zero"><rect x="88" y="152" width="150" height="16" rx="8" fill="rgba(74,222,128,.1)" stroke="rgba(74,222,128,.5)"/><text x="163" y="163" fill="#4ADE80" font-size="7" text-anchor="middle" font-weight="700">0 BUSINESS LOGIC TOUCHED</text></g>
+            </g>
+            <g class="wipe"><rect width="340" height="180" fill="#101B33"/></g>
+          </svg></div>
+          <span class="simtag">Illustrative recreation</span>
+        </div>
+        <div class="wmeta"><span class="wid">02</span><h3>Report Logs</h3><span class="wmetric">50K+ txns/day</span></div>
+        <p class="wone">Month-end used to mean a printer running all day. Now @Aspect catches everything, silently.</p>
+        <span class="wcta">Full case study</span>
+      </article>
+
+      <!-- 03 DASHBOARD -->
+      <article class="work rv" tabindex="0" role="button" aria-haspopup="dialog" data-modal="dash" aria-label="Open case study: My Requests and Dashboard">
+        <div class="client video">
+          <div class="vbar"><span class="vp"></span><span class="vprog"><i></i></span><span class="vt">0:16</span></div>
+          <div class="stage"><svg class="v3" viewBox="0 0 320 180" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect width="320" height="180" fill="#0C1226"/>
+            <rect y="150" width="320" height="30" fill="#0A0F1E"/>
+            <g class="ph pA">
+              <text x="10" y="16" fill="#F8A79C" font-size="8" letter-spacing="2" font-weight="700">"WHERE IS MY RECALL? DID THE CARD GO THROUGH?"</text>
+              <g transform="translate(160,140)">
+                <circle cx="0" cy="-27" r="6.5" fill="#EDF1F7"/>
+                <rect x="-5.5" y="-21" width="11" height="19" rx="4.5" fill="#4D7CFE"/>
+                <rect x="-4.5" y="-3" width="3.6" height="14" rx="1.8" fill="#8A94A6"/><rect x="1" y="-3" width="3.6" height="14" rx="1.8" fill="#8A94A6"/>
+                <g class="grr"><text x="8" y="-36" fill="#F26D5F" font-size="12" font-weight="700">!!</text></g>
+              </g>
+              <g class="fd"><rect x="86" y="62" width="18" height="24" fill="#D8DEE9"/><path d="M89 68h12M89 74h12M89 80h8" stroke="#9AA6BC"/><text x="95" y="58" fill="#F26D5F" font-size="10" text-anchor="middle" font-weight="700">?</text></g>
+              <g class="fd fd2"><rect x="150" y="46" width="18" height="24" fill="#D8DEE9"/><path d="M153 52h12M153 58h12M153 64h8" stroke="#9AA6BC"/><text x="159" y="42" fill="#F26D5F" font-size="10" text-anchor="middle" font-weight="700">?</text></g>
+              <g class="fd fd3"><rect x="214" y="64" width="18" height="24" fill="#D8DEE9"/><path d="M217 70h12M217 76h12M217 82h8" stroke="#9AA6BC"/><text x="223" y="60" fill="#F26D5F" font-size="10" text-anchor="middle" font-weight="700">?</text></g>
+            </g>
+            <g class="ph pB">
+              <text x="10" y="16" fill="#7C9CFF" font-size="8" letter-spacing="2" font-weight="700">MY REQUESTS — EVERY APPLICATION, ONE PAGE</text>
+              <rect x="64" y="30" width="192" height="112" rx="6" fill="#0A1220" stroke="#4D7CFE"/>
+              <rect x="150" y="142" width="20" height="6" fill="#1B2A47"/><rect x="134" y="148" width="52" height="3" rx="1.5" fill="#1B2A47"/>
+              <text x="74" y="46" fill="#EDF1F7" font-size="8.5" font-weight="700">MY REQUESTS</text>
+              <text x="90" y="60" fill="#8A94A6" font-size="6.5" text-anchor="middle">INCOMPLETE</text>
+              <text x="130" y="60" fill="#8A94A6" font-size="6.5" text-anchor="middle">PENDING</text>
+              <text x="170" y="60" fill="#8A94A6" font-size="6.5" text-anchor="middle">APPROVED</text>
+              <text x="210" y="60" fill="#8A94A6" font-size="6.5" text-anchor="middle">REJECTED</text>
+              <rect class="ind3" x="76" y="64" width="28" height="2" fill="#7C9CFF"/>
+              <rect class="rh1" x="74" y="72" width="172" height="13" rx="3" fill="#0E1728"/>
+              <text x="80" y="81" fill="#8A94A6" font-size="6.5">BC-2214 · Business Card</text><text x="240" y="81" fill="#F2B94B" font-size="6" text-anchor="end" font-weight="700">INCOMPLETE</text>
+              <rect class="rh2" x="74" y="89" width="172" height="13" rx="3" fill="#0E1728"/>
+              <text x="80" y="98" fill="#8A94A6" font-size="6.5">RT-1108 · Recall</text><text x="240" y="98" fill="#7C9CFF" font-size="6" text-anchor="end" font-weight="700">PENDING</text>
+              <rect class="rh3" x="74" y="106" width="172" height="13" rx="3" fill="#0E1728"/>
+              <text x="80" y="115" fill="#8A94A6" font-size="6.5">BC-2190 · Business Card</text><text x="240" y="115" fill="#4ADE80" font-size="6" text-anchor="end" font-weight="700">APPROVED</text>
+              <rect class="rh4" x="74" y="123" width="172" height="13" rx="3" fill="#0E1728"/>
+              <text x="80" y="132" fill="#8A94A6" font-size="6.5">RT-1042 · Recall</text><text x="240" y="132" fill="#F26D5F" font-size="6" text-anchor="end" font-weight="700">REJECTED</text>
+              <g class="ping3"><text x="160" y="162" fill="#4ADE80" font-size="7" text-anchor="middle" font-weight="700">✉ + 📱 EMAIL &amp; SMS → BENEFICIARY, AUTOMATICALLY</text></g>
+              <g transform="translate(284,140)">
+                <circle cx="0" cy="-26" r="6.5" fill="#EDF1F7"/>
+                <rect x="-5.5" y="-20" width="11" height="18" rx="4.5" fill="#F2B94B"/>
+                <rect x="-14" y="-11" width="12" height="3.4" rx="1.7" fill="#8A94A6"/>
+              </g>
+              <g class="mod3">
+                <rect x="64" y="30" width="192" height="112" rx="6" fill="rgba(5,9,16,.8)"/>
+                <rect x="88" y="58" width="144" height="56" rx="6" fill="#101A2C" stroke="#F2B94B"/>
+                <text x="160" y="74" fill="#F2B94B" font-size="7.5" text-anchor="middle" font-weight="700">SESSION EXPIRING — <tspan class="j-sess">4:59</tspan></text>
+                <text x="160" y="85" fill="#8A94A6" font-size="6.5" text-anchor="middle">5 minutes left in your session</text>
+                <rect x="104" y="92" width="50" height="14" rx="4" fill="#F2B94B"/>
+                <text x="129" y="102" fill="#0B0E14" font-size="7" text-anchor="middle" font-weight="700">EXTEND</text>
+                <rect x="166" y="92" width="50" height="14" rx="4" fill="none" stroke="rgba(237,241,247,.3)"/>
+                <text x="191" y="102" fill="#8A94A6" font-size="7" text-anchor="middle">LOGOUT</text>
+              </g>
+              <circle class="clik" cx="129" cy="99" r="10" fill="none" stroke="#F2B94B" stroke-width="2"/>
+              <g class="ptr"><polygon points="129,99 129,113 133,109 137,115 140,113 136,107 141,106" fill="#EDF1F7" stroke="#0B0E14" stroke-width="1"/></g>
+              <g class="ext3"><rect x="98" y="72" width="124" height="18" rx="9" fill="rgba(74,222,128,.12)" stroke="#4ADE80"/><text x="160" y="84" fill="#4ADE80" font-size="7.5" text-anchor="middle" font-weight="700">SESSION EXTENDED ✓</text></g>
+            </g>
+            <g class="wipe"><rect width="340" height="180" fill="#101B33"/></g>
+          </svg></div>
+          <span class="simtag">Illustrative recreation</span>
+        </div>
+        <div class="wmeta"><span class="wid">03</span><h3>My Requests &amp; Dashboard</h3><span class="wmetric">Lighthouse 62→88</span></div>
+        <p class="wone">Every application, four tabs — with email + SMS alerts and a session-timeout guard.</p>
+        <span class="wcta">Full case study</span>
+      </article>
+
+      <!-- 04 RECALL -->
+      <article class="work rv" tabindex="0" role="button" aria-haspopup="dialog" data-modal="recall" aria-label="Open case study: Recall Transactions">
+        <div class="client video">
+          <div class="vbar"><span class="vp"></span><span class="vprog"><i></i></span><span class="vt">0:16</span></div>
+          <div class="stage"><svg class="v4" viewBox="0 0 320 180" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect width="320" height="180" fill="#0C1024"/>
+            <circle cx="288" cy="26" r="9" fill="#F2B94B" opacity=".85"/>
+            <circle cx="250" cy="18" r="1.2" fill="#8A94A6"/><circle cx="34" cy="26" r="1.2" fill="#8A94A6"/><circle cx="120" cy="14" r="1" fill="#8A94A6"/>
+            <rect y="150" width="320" height="30" fill="#0A0F1E"/>
+            <rect class="flash" width="320" height="180" fill="#F26D5F"/>
+            <g class="ph p1g">
+              <text x="10" y="16" fill="#F8A79C" font-size="8" letter-spacing="2" font-weight="700">9:47 PM — HOME</text>
+              <rect x="42" y="104" width="86" height="20" rx="8" fill="#232E52"/>
+              <rect x="40" y="120" width="90" height="26" rx="6" fill="#1B2440"/>
+              <rect x="36" y="116" width="9" height="32" rx="3" fill="#232E52"/><rect x="125" y="116" width="9" height="32" rx="3" fill="#232E52"/>
+              <g transform="translate(84,132)">
+                <circle cx="0" cy="-26" r="6.5" fill="#EDF1F7"/>
+                <rect x="-5.5" y="-20" width="11" height="18" rx="4.5" fill="#F2B94B"/>
+                <rect x="-2" y="-11" width="12" height="3.4" rx="1.7" fill="#8A94A6"/>
+                <rect x="10" y="-17" width="7" height="11" rx="1.5" fill="#0A1220" stroke="#7C9CFF"/>
+              </g>
+              <text x="84" y="90" fill="#F26D5F" font-size="12" font-weight="700" text-anchor="middle">!!!</text>
+              <g class="alertg">
+                <rect x="128" y="46" width="160" height="32" rx="8" fill="rgba(242,109,95,.14)" stroke="#F26D5F"/>
+                <text x="208" y="59" fill="#FF8A7A" font-size="8.5" text-anchor="middle" font-weight="700">⚠ WRONG PAYMENT SENT</text>
+                <text x="208" y="71" fill="#F8A79C" font-size="8" text-anchor="middle">₹2,40,000 → wrong account</text>
+              </g>
+            </g>
+            <g class="ph p2g">
+              <text x="10" y="16" fill="#F8A79C" font-size="8" letter-spacing="2" font-weight="700">RUNNING TO THE BRANCH…</text>
+              <polygon points="232,78 316,78 274,56" fill="#0E1526" stroke="rgba(237,241,247,.1)"/>
+              <rect x="236" y="78" width="76" height="72" fill="#0E1526" stroke="rgba(237,241,247,.1)"/>
+              <rect x="243" y="92" width="7" height="58" fill="#182238"/><rect x="262" y="92" width="7" height="58" fill="#182238"/><rect x="281" y="92" width="7" height="58" fill="#182238"/><rect x="300" y="92" width="7" height="58" fill="#182238"/>
+              <text x="274" y="72" fill="#525D70" font-size="8" text-anchor="middle" letter-spacing="3">BANK</text>
+              <g class="runner"><g class="lean">
+                <circle cx="0" cy="-27" r="6.5" fill="#EDF1F7"/>
+                <rect x="-5.5" y="-21" width="11" height="19" rx="4.5" fill="#F2B94B"/>
+                <g class="lg lgA"><rect x="-4.5" y="-3" width="3.6" height="15" rx="1.8" fill="#8A94A6"/></g>
+                <g class="lg lgB"><rect x="1" y="-3" width="3.6" height="15" rx="1.8" fill="#8A94A6"/></g>
+              </g></g>
+            </g>
+            <g class="ph p3g">
+              <text x="10" y="16" fill="#F8A79C" font-size="8" letter-spacing="2" font-weight="700">10:02 PM — TOO LATE</text>
+              <polygon points="232,78 316,78 274,56" fill="#0E1526" stroke="rgba(237,241,247,.1)"/>
+              <rect x="236" y="78" width="76" height="72" fill="#0E1526" stroke="rgba(237,241,247,.1)"/>
+              <rect x="243" y="92" width="7" height="58" fill="#182238"/><rect x="300" y="92" width="7" height="58" fill="#182238"/>
+              <rect x="264" y="112" width="22" height="38" fill="#080D1A"/>
+              <g class="closed"><rect x="258" y="116" width="34" height="14" rx="2" fill="#101A2C" stroke="#F26D5F"/><text x="275" y="126" fill="#F26D5F" font-size="7.5" text-anchor="middle" font-weight="700">CLOSED</text></g>
+              <text x="275" y="146" fill="#525D70" font-size="6.5" text-anchor="middle">OPENS 10 AM</text>
+              <g class="slump"><g>
+                <circle cx="0" cy="-25" r="6.5" fill="#EDF1F7"/>
+                <rect x="-5.5" y="-19" width="11" height="19" rx="4.5" fill="#F2B94B"/>
+                <rect x="-4.5" y="-1" width="3.6" height="14" rx="1.8" fill="#8A94A6"/>
+                <rect x="1" y="-1" width="3.6" height="14" rx="1.8" fill="#8A94A6"/>
+              </g></g>
+            </g>
+            <g class="ph p5g">
+              <text x="10" y="16" fill="#7C9CFF" font-size="8" letter-spacing="2" font-weight="700">BACK ON THE COUCH — SERVICE ONLINE</text>
+              <rect x="26" y="104" width="86" height="20" rx="8" fill="#232E52"/>
+              <rect x="24" y="120" width="90" height="26" rx="6" fill="#1B2440"/>
+              <rect x="20" y="116" width="9" height="32" rx="3" fill="#232E52"/><rect x="109" y="116" width="9" height="32" rx="3" fill="#232E52"/>
+              <g transform="translate(68,132)">
+                <circle cx="0" cy="-26" r="6.5" fill="#EDF1F7"/>
+                <rect x="-5.5" y="-20" width="11" height="18" rx="4.5" fill="#F2B94B"/>
+                <rect x="-2" y="-11" width="13" height="3.4" rx="1.7" fill="#8A94A6"/>
+              </g>
+              <text class="rok" x="68" y="86" fill="#4ADE80" font-size="7.5" text-anchor="middle" font-weight="700">FROM THE COUCH</text>
+              <rect x="150" y="30" width="110" height="136" rx="13" fill="#0A1220" stroke="#7C9CFF"/>
+              <rect x="192" y="36" width="26" height="3.5" rx="1.75" fill="rgba(237,241,247,.2)"/>
+              <text x="205" y="54" fill="#EDF1F7" font-size="8.5" text-anchor="middle" font-weight="600">Recall transaction</text>
+              <rect x="169.25" y="70" width="1.5" height="74" fill="#1E2A44"/>
+              <rect class="vf" x="169.25" y="70" width="1.5" height="74" fill="#4D7CFE"/>
+              <circle class="d1" cx="170" cy="72" r="4.5" fill="#0E1728" stroke="#525D70" stroke-width="1.5"/>
+              <circle class="d2" cx="170" cy="96" r="4.5" fill="#0E1728" stroke="#525D70" stroke-width="1.5"/>
+              <circle class="d3" cx="170" cy="120" r="4.5" fill="#0E1728" stroke="#525D70" stroke-width="1.5"/>
+              <circle class="d4" cx="170" cy="144" r="4.5" fill="#0E1728" stroke="#525D70" stroke-width="1.5"/>
+              <text x="182" y="75" fill="#8A94A6" font-size="7.5">Initiate recall</text>
+              <text x="182" y="99" fill="#8A94A6" font-size="7.5">Verify details</text>
+              <text x="182" y="123" fill="#8A94A6" font-size="7.5">Camunda approval</text>
+              <text x="182" y="147" fill="#8A94A6" font-size="7.5">Recalled</text>
+              <text class="rok" x="205" y="160" fill="#4ADE80" font-size="8" text-anchor="middle" font-weight="700">✓ RECALLED</text>
+            </g>
+            <g class="wipe">
+              <rect x="0" y="0" width="340" height="180" fill="#F2B94B"/>
+              <text x="170" y="94" fill="#070B12" font-size="13" font-weight="700" text-anchor="middle" letter-spacing="4">SERVICE ONLINE</text>
+            </g>
+          </svg></div>
+          <span class="simtag">Illustrative recreation</span>
+        </div>
+        <div class="wmeta"><span class="wid">04</span><h3>Recall Transactions</h3><span class="wmetric">Branch → online</span></div>
+        <p class="wone">A wrong payment used to mean a branch visit. Now it's four steps from anywhere.</p>
+        <span class="wcta">Full case study</span>
+      </article>
+
+      <!-- 05 NOTIFICATIONS -->
+      <article class="work rv" tabindex="0" role="button" aria-haspopup="dialog" data-modal="notif" aria-label="Open case study: Notifications engine">
+        <div class="client video">
+          <div class="vbar"><span class="vp"></span><span class="vprog"><i></i></span><span class="vt">0:16</span></div>
+          <div class="stage"><svg class="v5" viewBox="0 0 320 180" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect class="sky5" width="320" height="180" fill="#14213C"/>
+            <g class="sun"><circle cx="286" cy="30" r="11" fill="#F2B94B"/></g>
+            <g class="moon"><circle cx="282" cy="28" r="9" fill="#D8DEE9"/><circle cx="286" cy="25" r="8" fill="#0B0F22"/></g>
+            <circle class="star" cx="40" cy="24" r="1.2" fill="#8A94A6"/><circle class="star" cx="120" cy="16" r="1" fill="#8A94A6"/><circle class="star" cx="206" cy="22" r="1.2" fill="#8A94A6"/><circle class="star" cx="252" cy="46" r="1" fill="#8A94A6"/>
+            <rect y="150" width="320" height="30" fill="#0A0F1E"/>
+            <rect x="96" y="122" width="128" height="5" fill="#1B2A47"/>
+            <rect x="104" y="127" width="5" height="23" fill="#1B2A47"/><rect x="211" y="127" width="5" height="23" fill="#1B2A47"/>
+            <rect x="128" y="66" width="86" height="54" rx="4" fill="#0A1220" stroke="#4D7CFE"/>
+            <rect x="124" y="120" width="94" height="3" rx="1.5" fill="#1B2A47"/>
+            <g class="ph pA">
+              <text x="10" y="16" fill="#EDF1F7" font-size="8" letter-spacing="2" font-weight="700">TUESDAY 3 PM — PAGE 2 OF 14</text>
+              <text x="136" y="80" fill="#EDF1F7" font-size="7" font-weight="700">BUSINESS CARD</text>
+              <rect x="136" y="86" width="70" height="4" rx="2" fill="#132038"/>
+              <rect x="136" y="86" width="10" height="4" rx="2" fill="#F2B94B"/>
+              <text x="136" y="100" fill="#8A94A6" font-size="6">Step 2 of 14</text>
+              <g class="ringp"><text x="246" y="60" font-size="13">📞</text></g>
+              <g class="draft"><rect x="134" y="104" width="74" height="12" rx="6" fill="rgba(124,156,255,.12)" stroke="rgba(124,156,255,.5)"/><text x="171" y="113" fill="#7C9CFF" font-size="6" text-anchor="middle" font-weight="700">DRAFT AUTOSAVED</text></g>
+              <g class="guyA"><g transform="translate(240,140)">
+                <circle cx="0" cy="-27" r="6.5" fill="#EDF1F7"/>
+                <rect x="-5.5" y="-21" width="11" height="19" rx="4.5" fill="#4D7CFE"/>
+                <rect x="-4.5" y="-3" width="3.6" height="14" rx="1.8" fill="#8A94A6"/><rect x="1" y="-3" width="3.6" height="14" rx="1.8" fill="#8A94A6"/>
+              </g></g>
+            </g>
+            <g class="ph pT">
+              <g class="later"><text x="160" y="94" fill="#EDF1F7" font-size="11" text-anchor="middle" font-weight="700" letter-spacing="3">3 DAYS LATER…</text></g>
+            </g>
+            <g class="ph pC">
+              <text x="10" y="16" fill="#7C9CFF" font-size="8" letter-spacing="2" font-weight="700">FRIDAY NIGHT — SIGNED BACK IN</text>
+              <rect x="136" y="72" width="70" height="10" rx="3" fill="#0E1728"/>
+              <text x="140" y="79.5" fill="#EDF1F7" font-size="5.5" font-weight="700">SERVICE<tspan fill="#7C9CFF">ONLINE</tspan></text>
+              <g class="bell5"><text x="192" y="81" font-size="9">🔔</text></g>
+              <g class="bdg"><circle cx="202" cy="73" r="5" fill="#F26D5F"/><text x="202" y="75.5" fill="#fff" font-size="6" text-anchor="middle" font-weight="700">2</text></g>
+              <g class="pan5">
+                <rect x="134" y="85" width="76" height="30" rx="4" fill="#101A2C" stroke="rgba(124,156,255,.5)"/>
+                <rect class="tap" x="137" y="88" width="70" height="12" rx="3" fill="#0E1728"/>
+                <text x="141" y="95" fill="#F2B94B" font-size="5">⚠ INCOMPLETE — CARD · PAGE 3 WAITING</text>
+                <rect x="137" y="101" width="70" height="12" rx="3" fill="#0E1728"/>
+                <text x="141" y="108" fill="#8A94A6" font-size="5">★ NEW — RECALL NOW ONLINE</text>
+              </g>
+              <g class="res">
+                <text x="136" y="82" fill="#EDF1F7" font-size="7" font-weight="700">BUSINESS CARD</text>
+                <rect x="136" y="88" width="70" height="4" rx="2" fill="#132038"/>
+                <rect class="rbar" x="136" y="88" width="12" height="4" rx="2" fill="#F2B94B"/>
+                <text x="136" y="102" fill="#7C9CFF" font-size="6" font-weight="700">STEP 3 OF 14 — RESUMED</text>
+              </g>
+              <g class="left5"><rect x="122" y="128" width="98" height="14" rx="7" fill="rgba(74,222,128,.12)" stroke="#4ADE80"/><text x="171" y="138" fill="#4ADE80" font-size="6.5" text-anchor="middle" font-weight="700">RIGHT WHERE YOU LEFT OFF ✓</text></g>
+              <g class="guyC"><g transform="translate(240,140)">
+                <circle cx="0" cy="-27" r="6.5" fill="#EDF1F7"/>
+                <rect x="-5.5" y="-21" width="11" height="19" rx="4.5" fill="#4D7CFE"/>
+                <rect x="-4.5" y="-3" width="3.6" height="14" rx="1.8" fill="#8A94A6"/><rect x="1" y="-3" width="3.6" height="14" rx="1.8" fill="#8A94A6"/>
+              </g></g>
+            </g>
+          </svg></div>
+          <span class="simtag">Illustrative recreation</span>
+        </div>
+        <div class="wmeta"><span class="wid">05</span><h3>Notifications</h3><span class="wmetric">1-click resume</span></div>
+        <p class="wone">Log in, see what you missed, tap once — land exactly where you stopped.</p>
+        <span class="wcta">Full case study</span>
+      </article>
+
+      <!-- 06 QKART -->
+      <article class="work rv" tabindex="0" role="button" aria-haspopup="dialog" data-modal="qkart" aria-label="Open case study: QKart">
+        <div class="client video">
+          <div class="vbar"><span class="vp"></span><span class="vprog"><i></i></span><span class="vt">0:16</span></div>
+          <div class="stage"><svg class="v6" viewBox="0 0 320 180" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect width="320" height="180" fill="#141021"/>
+            <ellipse class="glow" cx="70" cy="60" rx="90" ry="70" fill="#F2B94B" opacity=".16"/>
+            <rect y="150" width="320" height="30" fill="#0F0C1A"/>
+            <text x="10" y="16" fill="#F2B94B" font-size="8" letter-spacing="2" font-weight="700">11:26 PM — SIDE PROJECT</text>
+            <rect x="34" y="52" width="10" height="42" fill="#241C38"/><ellipse cx="39" cy="50" rx="16" ry="7" fill="#241C38"/>
+            <rect x="88" y="122" width="140" height="5" fill="#241C38"/>
+            <rect x="96" y="127" width="5" height="23" fill="#241C38"/><rect x="215" y="127" width="5" height="23" fill="#241C38"/>
+            <rect x="118" y="58" width="96" height="62" rx="4" fill="#0A0816" stroke="#F2B94B" stroke-opacity=".55"/>
+            <rect x="114" y="120" width="104" height="3" rx="1.5" fill="#241C38"/>
+            <g transform="translate(258,140)">
+              <circle cx="0" cy="-27" r="6.5" fill="#EDF1F7"/>
+              <rect x="-5.5" y="-21" width="11" height="19" rx="4.5" fill="#F2B94B"/>
+              <rect x="-16" y="-12" width="13" height="3.4" rx="1.7" fill="#8A94A6"/>
+              <rect x="10" y="-9" width="7" height="8" rx="1.5" fill="#7C9CFF"/>
+              <path class="steam" d="M12 -12 q2 -3 0 -6" stroke="#8A94A6" fill="none" stroke-width="1.2"/>
+              <path class="steam steam2" d="M16 -12 q-2 -3 0 -6" stroke="#8A94A6" fill="none" stroke-width="1.2"/>
+            </g>
+            <g class="scrA">
+              <text x="126" y="70" fill="#8A94A6" font-size="6">qkart / src / hooks</text>
+              <rect class="cd1" x="126" y="76" width="52" height="4" rx="2" fill="#7C9CFF"/>
+              <rect class="cd2" x="126" y="84" width="38" height="4" rx="2" fill="#F2B94B"/>
+              <rect class="cd3" x="126" y="92" width="60" height="4" rx="2" fill="#4ADE80"/>
+              <rect class="cd4" x="126" y="100" width="30" height="4" rx="2" fill="#7C9CFF"/>
+              <text x="126" y="114" fill="#525D70" font-size="5.5">useMemo · custom hooks · Context</text>
+            </g>
+            <g class="scrB">
+              <text x="126" y="70" fill="#EDF1F7" font-size="7" font-weight="700">QKART</text>
+              <text x="196" y="70" font-size="8">🛒</text>
+              <circle cx="206" cy="64" r="4.5" fill="#F2B94B"/><text class="j-cart" x="206" y="66.5" fill="#0B0E14" font-size="5.5" text-anchor="middle" font-weight="700">0</text>
+              <g class="pk1"><rect x="124" y="76" width="27" height="36" rx="3" fill="#141B2E" stroke="rgba(124,156,255,.4)"/><rect x="127" y="79" width="21" height="14" rx="2" fill="#1E2A47"/><text x="137" y="100" fill="#F2B94B" font-size="5" text-anchor="middle">₹2,499</text><rect x="127" y="103" width="21" height="6" rx="2" fill="rgba(124,156,255,.2)"/><text x="137" y="107.8" fill="#7C9CFF" font-size="4.5" text-anchor="middle" font-weight="700">ADD</text></g>
+              <g class="pk2"><rect x="153" y="76" width="27" height="36" rx="3" fill="#141B2E" stroke="rgba(124,156,255,.4)"/><rect x="156" y="79" width="21" height="14" rx="2" fill="#1E2A47"/><text x="166" y="100" fill="#F2B94B" font-size="5" text-anchor="middle">₹3,199</text><rect x="156" y="103" width="21" height="6" rx="2" fill="rgba(124,156,255,.2)"/><text x="166" y="107.8" fill="#7C9CFF" font-size="4.5" text-anchor="middle" font-weight="700">ADD</text></g>
+              <g class="pk3"><rect x="182" y="76" width="27" height="36" rx="3" fill="#141B2E" stroke="rgba(124,156,255,.4)"/><rect x="185" y="79" width="21" height="14" rx="2" fill="#1E2A47"/><text x="195" y="100" fill="#F2B94B" font-size="5" text-anchor="middle">₹1,899</text><rect x="185" y="103" width="21" height="6" rx="2" fill="rgba(124,156,255,.2)"/><text x="195" y="107.8" fill="#7C9CFF" font-size="4.5" text-anchor="middle" font-weight="700">ADD</text></g>
+              <circle class="clik6" cx="166" cy="106" r="8" fill="none" stroke="#F2B94B" stroke-width="2"/>
+              <g class="ptr6"><polygon points="166,106 166,118 169.5,114.5 173,120 175.5,118 172,113 176,112" fill="#EDF1F7" stroke="#0B0E14" stroke-width="1"/></g>
+              <circle class="fly6" cx="206" cy="64" r="3.5" fill="#7C9CFF"/>
+              <g class="op6"><rect x="132" y="128" width="76" height="13" rx="6.5" fill="rgba(74,222,128,.12)" stroke="#4ADE80"/><text x="170" y="137" fill="#4ADE80" font-size="6" text-anchor="middle" font-weight="700">✓ ORDER PLACED</text></g>
+            </g>
+            <g class="p40"><rect x="18" y="128" width="104" height="14" rx="7" fill="rgba(242,185,75,.12)" stroke="rgba(242,185,75,.55)"/><text x="70" y="138" fill="#F2B94B" font-size="6.5" text-anchor="middle" font-weight="700">−40% RE-RENDERS</text></g>
+            <g class="liv"><text x="160" y="166" fill="#8A94A6" font-size="7" text-anchor="middle" letter-spacing="2">THIS ONE IS LIVE — CLICK THE CARD TO TRY IT</text></g>
+          </svg></div>
+          <span class="simtag">Live demo available</span>
+        </div>
+        <div class="wmeta"><span class="wid">06</span><h3>QKart</h3><span class="wmetric">−40% re-renders</span></div>
+        <p class="wone">Built at 11 PM, deployed for real — the only demo here you can actually click.</p>
+        <span class="wcta">Full case study</span>
+      </article>
     </div>
-    <div class="stat">
-      <div class="stat-num"><span class="counter" data-target="50000">0</span><span class="unit">+</span></div>
-      <div class="stat-label">Daily transactions persisted at 99.9% consistency</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num"><span class="counter" data-target="42">0</span><span class="unit">%</span></div>
-      <div class="stat-label">Lighthouse score improvement — 62 to 88</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num"><span class="counter" data-target="5">0</span></div>
-      <div class="stat-label">Production features shipped end-to-end</div>
-    </div>
-  </div>
+  </section>
 
   <!-- EXPERIENCE -->
-  <section class="section" id="experience">
-    <div class="section-header">
-      <span class="section-num">01</span>
-      <span class="section-title">Experience</span>
-      <div class="section-line"></div>
-    </div>
-
-    <!-- Zensar -->
-    <div class="exp-block">
-      <div class="exp-meta">
+  <section class="shell" id="experience" aria-label="Experience">
+    <p class="kicker rv">Account history</p>
+    <h2 class="big rv rv2">Where the work <em>happened.</em></h2>
+    <div class="xp">
+      <div class="xp-row rv">
+        <div class="when">Dec 2024 — Mar 2026<br>Pune, India</div>
         <div>
-          <div class="exp-co">Zensar Technologies</div>
-          <div class="exp-role">software_engineer · Standard Bank South Africa</div>
-        </div>
-        <div class="exp-badge">Dec 2024 – Present</div>
-      </div>
-
-      <div class="projects-grid">
-        <div class="proj">
-          <div class="proj-top">
-            <div class="proj-name">My Requests &amp; Dashboard</div>
-            <div class="proj-type fe">Frontend</div>
-          </div>
-          <div class="proj-desc">Built the My Requests page from scratch with React 16 &amp; Redux, consolidating 4+ fragmented modules into one surface. Delivered the enterprise dashboard as the primary entry point for 100% of Standard Bank's corporate client base.</div>
-          <div class="proj-metrics">
-            <div class="metric">10,000+ users</div>
-            <div class="metric">Lighthouse <b>62→88</b></div>
-            <div class="metric">Load time <b>↓35%</b></div>
-            <div class="metric">React 16 · Redux</div>
-          </div>
-        </div>
-
-        <div class="proj">
-          <div class="proj-top">
-            <div class="proj-name">Notifications System</div>
-            <div class="proj-type fe">Frontend</div>
-          </div>
-          <div class="proj-desc">Real-time notification engine replacing manual polling with event-driven alerts. WCAG 2.1-compliant role-based preferences let enterprise admins configure per-role thresholds.</div>
-          <div class="proj-metrics">
-            <div class="metric">Engagement <b>↑40%</b></div>
-            <div class="metric">WCAG 2.1</div>
-            <div class="metric">React 16 · Redux</div>
-          </div>
-        </div>
-
-        <div class="proj">
-          <div class="proj-top">
-            <div class="proj-name">Business Card Onboarding</div>
-            <div class="proj-type fs">Full-Stack</div>
-          </div>
-          <div class="proj-desc">Converted a 15-page manual process into a 14-screen React application. Dual-layer React Hook Form validation eliminated 90% of data errors. Led migration to React 18, Next.js, and TypeScript.</div>
-          <div class="proj-metrics">
-            <div class="metric">Processing <b>↓60%</b></div>
-            <div class="metric">Errors <b>↓90%</b></div>
-            <div class="metric">React 18 · Next.js · TS</div>
-          </div>
-        </div>
-
-        <div class="proj">
-          <div class="proj-top">
-            <div class="proj-name">Recall Transactions</div>
-            <div class="proj-type fs">Full-Stack</div>
-          </div>
-          <div class="proj-desc">Replaced a branch-only recall process with a 7-screen self-service workflow. Multi-step forms with navigation guards blocked malformed submissions before API calls.</div>
-          <div class="proj-metrics">
-            <div class="metric">Branch visits <b>↓95%</b></div>
-            <div class="metric">Accuracy <b>↑88%</b></div>
-            <div class="metric">React · Spring Boot</div>
-          </div>
-        </div>
-
-        <div class="proj">
-          <div class="proj-top">
-            <div class="proj-name">Report Logs — AOP Audit System</div>
-            <div class="proj-type be">Backend</div>
-          </div>
-          <div class="proj-desc">Enterprise AOP audit logging using @Aspect pointcuts and JautoProxy. Intercepted all download and email API calls with zero changes to existing business logic. Enabled fraud detection across 1,000+ monthly reports.</div>
-          <div class="proj-metrics">
-            <div class="metric"><b>50K+</b> daily txns</div>
-            <div class="metric"><b>99.9%</b> consistency</div>
-            <div class="metric">Boilerplate <b>↓60%</b></div>
-            <div class="metric">Spring AOP · Hibernate</div>
-          </div>
+          <h3>Software Engineer</h3>
+          <div class="org">Zensar Technologies · Standard Bank South Africa</div>
+          <p>Full-stack development on Service Online, the bank's enterprise platform for corporate clients — React 16/18, TypeScript and Redux up front; Java, Spring Boot, Spring Data JPA and REST APIs behind.</p>
+          <ul>
+            <li>Contributed to the React 18 / Next.js / TypeScript migration; reusable component and Redux patterns adopted across 3+ platform features.</li>
+            <li>Unit and integration tests with Jest, React Testing Library and JUnit; every feature validated through full SIT/UAT release cycles.</li>
+          </ul>
         </div>
       </div>
-    </div>
-
-    <!-- Pixelvide -->
-    <div class="exp-block">
-      <div class="exp-meta">
+      <div class="xp-row rv">
+        <div class="when">Oct 2023 — Feb 2024<br>Hyderabad, India</div>
         <div>
-          <div class="exp-co">Pixelvide</div>
-          <div class="exp-role">software_developer_intern</div>
-        </div>
-        <div class="exp-badge">Oct 2023 – Feb 2024</div>
-      </div>
-      <div class="projects-grid">
-        <div class="proj">
-          <div class="proj-top">
-            <div class="proj-name">3 Production Web Applications</div>
-            <div class="proj-type fs">Full-Stack</div>
-          </div>
-          <div class="proj-desc">Shipped 3 production apps serving 100+ concurrent users. Full e-commerce platform with 95% test coverage. Built 8+ reusable React components adopted across 3+ projects, increasing team velocity by 20%.</div>
-          <div class="proj-metrics">
-            <div class="metric">Core Vitals <b>65→82</b></div>
-            <div class="metric">Load <b>↓25%</b></div>
-            <div class="metric">95% test coverage</div>
-            <div class="metric">Velocity <b>↑20%</b></div>
-          </div>
+          <h3>Software Developer Intern</h3>
+          <div class="org">Pixelvide</div>
+          <p>Shipped 3 production web applications serving 100+ concurrent users, owning delivery from UI design through backend integration.</p>
+          <ul>
+            <li>95% functional test coverage on a full e-commerce platform; Core Web Vitals 65 → 82 via lazy loading and asset optimisation.</li>
+            <li>Tracker application in PHP and MySQL — server-side logic and database operations.</li>
+          </ul>
         </div>
       </div>
     </div>
   </section>
 
   <!-- SKILLS -->
-  <section class="section" id="skills">
-    <div class="section-header">
-      <span class="section-num">02</span>
-      <span class="section-title">Technical Skills</span>
-      <div class="section-line"></div>
-    </div>
-    <div class="skills-layout">
-      <div class="skill-card">
-        <div class="skill-card-label">Frontend</div>
-        <div class="tags">
-          <span class="tag">React.js v16/v18</span>
-          <span class="tag">TypeScript</span>
-          <span class="tag">Next.js</span>
-          <span class="tag">Redux</span>
-          <span class="tag">Redux Toolkit</span>
-          <span class="tag">React Query</span>
-          <span class="tag">React Hook Form</span>
-          <span class="tag">Vite</span>
-          <span class="tag">Material UI</span>
-          <span class="tag">Bootstrap</span>
-          <span class="tag">HTML5</span>
-          <span class="tag">CSS3</span>
-        </div>
+  <section class="shell" id="skills" aria-label="Skills">
+    <p class="kicker rv">Arsenal</p>
+    <h2 class="big rv rv2">Production experience, <em>not buzzwords.</em></h2>
+    <div class="skills rv">
+      <div class="scell">
+        <h3>Frontend</h3>
+        <ul>
+          <li>React.js <small>v16 / v18</small></li>
+          <li>TypeScript · JS ES6+</li>
+          <li>Redux · Redux Toolkit</li>
+          <li>React Hook Form · Material UI</li>
+          <li>Next.js · HTML5 · CSS3</li>
+        </ul>
       </div>
-      <div class="skill-card">
-        <div class="skill-card-label">Backend</div>
-        <div class="tags">
-          <span class="tag">Spring Boot</span>
-          <span class="tag">Spring Data JPA</span>
-          <span class="tag">Hibernate ORM</span>
-          <span class="tag">AOP / AspectJ</span>
-          <span class="tag">RESTful APIs</span>
-          <span class="tag">Liquibase</span>
-          <span class="tag">Node.js</span>
-          <span class="tag">EJB</span>
-          <span class="tag">WebLogic</span>
-        </div>
+      <div class="scell">
+        <h3>Backend</h3>
+        <ul>
+          <li>Java 8 · Spring Boot</li>
+          <li>Spring Data JPA · Hibernate</li>
+          <li>REST API design · AOP/AspectJ</li>
+          <li>Camunda BPM · RabbitMQ</li>
+          <li>JasperReports · Liquibase</li>
+        </ul>
       </div>
-      <div class="skill-card">
-        <div class="skill-card-label">Messaging &amp; Workflow</div>
-        <div class="tags">
-          <span class="tag">Apache Kafka</span>
-          <span class="tag">RabbitMQ</span>
-          <span class="tag">Camunda BPM</span>
-        </div>
-      </div>
-      <div class="skill-card">
-        <div class="skill-card-label">Languages</div>
-        <div class="tags">
-          <span class="tag">JavaScript ES6+</span>
-          <span class="tag">TypeScript</span>
-          <span class="tag">Java 8–21</span>
-          <span class="tag">Python</span>
-        </div>
-      </div>
-      <div class="skill-card">
-        <div class="skill-card-label">Databases</div>
-        <div class="tags">
-          <span class="tag">PostgreSQL</span>
-          <span class="tag">MongoDB</span>
-          <span class="tag">SQL</span>
-          <span class="tag">Hibernate Dialect</span>
-        </div>
-      </div>
-      <div class="skill-card">
-        <div class="skill-card-label">DevOps &amp; Tools</div>
-        <div class="tags">
-          <span class="tag">Docker</span>
-          <span class="tag">Bamboo CI/CD</span>
-          <span class="tag">Git</span>
-          <span class="tag">GitHub</span>
-          <span class="tag">Figma</span>
-          <span class="tag">Agile / Scrum</span>
-          <span class="tag">JIRA</span>
-        </div>
+      <div class="scell">
+        <h3>Data · Testing · Ops</h3>
+        <ul>
+          <li>PostgreSQL · MySQL · SQL</li>
+          <li>JUnit · Jest · RTL</li>
+          <li>Git · Bitbucket · Bamboo CI/CD</li>
+          <li>Docker · Jira · Figma</li>
+          <li>Agile/Scrum · SIT/UAT</li>
+        </ul>
       </div>
     </div>
-  </section>
-
-  <!-- ABOUT -->
-  <section class="section" id="about">
-    <div class="section-header">
-      <span class="section-num">03</span>
-      <span class="section-title">About</span>
-      <div class="section-line"></div>
-    </div>
-    <div class="about-layout">
-      <div class="about-text">
-        <p>I'm a full-stack engineer based in <strong>Hyderabad</strong> with 2+ years in production at Zensar Technologies, where I built and shipped 5 features on Standard Bank South Africa's enterprise banking platform — used by over 10,000 corporate users.</p>
-        <p>I'm most at home in the <strong>React and Spring Boot</strong> world — building things that are fast, accessible, and reliable at scale. I care about the measurable outcomes behind every line of code: load time, error rate, audit consistency, user engagement.</p>
-        <p>Outside of the full stack, I've worked with <strong>Kafka, RabbitMQ, and Camunda BPM</strong> for event-driven systems and process orchestration — which is becoming increasingly relevant for the fintech and enterprise products I want to work on next.</p>
-        <p>Currently looking for <strong>Frontend, Full-Stack, or Software Engineer roles</strong> at product companies and startups across India or remote.</p>
+    <div class="edu rv">
+      <div>
+        <div class="deg">B.Tech, Computer Science — CGPA 8.49</div>
+        <div class="meta">Lakireddy Balireddy College of Engineering · 2018–2022</div>
       </div>
-      <div class="fact-list">
-        <div class="fact">
-          <div class="fact-icon">🎓</div>
-          <div class="fact-body">
-            <div class="fact-title">B.Tech — Computer Science Engineering</div>
-            <div class="fact-sub">Lakireddy Balireddy College of Engineering · CGPA 8.49 / 10.0 · 2018–2022</div>
-          </div>
-        </div>
-        <div class="fact">
-          <div class="fact-icon">📍</div>
-          <div class="fact-body">
-            <div class="fact-title">Hyderabad, India</div>
-            <div class="fact-sub">Open to Bengaluru, Pune, Chennai &amp; Remote</div>
-          </div>
-        </div>
-        <div class="fact">
-          <div class="fact-icon">⚡</div>
-          <div class="fact-body">
-            <div class="fact-title">Available immediately</div>
-            <div class="fact-sub">Open to full-time and contract roles</div>
-          </div>
-        </div>
-        <div class="fact">
-          <div class="fact-icon">🔗</div>
-          <div class="fact-body">
-            <div class="fact-title"><a href="https://github.com/Sujith-Mondithoka/qkart" target="_blank" rel="noopener" style="color:var(--indigo);text-decoration:none">QKart — Live project ↗</a></div>
-            <div class="fact-sub">Full-stack e-commerce SPA · React · TypeScript · Redux · sub-200ms loads</div>
-          </div>
-        </div>
-      </div>
+      <div class="meta">Hyderabad, India · open to relocate / remote</div>
     </div>
   </section>
 
   <!-- CONTACT -->
-  <div class="contact-section" id="contact">
-    <div class="contact-inner">
-      <h2>Let's work together</h2>
-      <p>Open to Frontend, Full-Stack, and Software Engineer roles across India and remote.</p>
-      <div class="contact-grid">
-        <a href="mailto:sujithmondithoka070@gmail.com" class="contact-btn">
-          <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
-          sujithmondithoka070@gmail.com
-        </a>
-        <a href="https://linkedin.com/in/sujith-m-a6b888249" target="_blank" rel="noopener" class="contact-btn">
-          <svg viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
-          LinkedIn
-        </a>
-        <a href="https://github.com/Sujith-Mondithoka" target="_blank" rel="noopener" class="contact-btn">
-          <svg viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
-          GitHub
-        </a>
-        <a href="tel:+917013976053" class="contact-btn">
-          <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-          +91 7013976053
-        </a>
+  <section class="shell contact" id="contact" aria-label="Contact">
+    <p class="kicker rv">Status: open to work</p>
+    <a class="giant rv rv2" href="mailto:sujithmondithoka070@gmail.com">Let's talk</a>
+    <div class="row rv rv3">
+      <div class="links">
+        <a href="mailto:sujithmondithoka070@gmail.com">sujithmondithoka070@gmail.com</a>
+        <a href="tel:+917013976053">+91 70139 76053</a>
+        <a href="https://www.linkedin.com/in/sujith-m-a6b888249" target="_blank" rel="noopener">LinkedIn ↗</a>
+        <a href="https://github.com/Sujith-Mondithoka" target="_blank" rel="noopener">GitHub ↗</a>
+      </div>
+      <div class="fine">© 2026 Sujith Mondithoka · Hand-rolled. Zero frameworks. 60fps.</div>
+    </div>
+  </section>
+</main>
+
+<!-- MODAL -->
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mtitle">
+  <div class="back" id="mback"></div>
+  <div class="mbox">
+    <button class="mclose" id="mclose" aria-label="Close case study">✕</button>
+    <p class="mkick" id="mkick"></p>
+    <h3 class="mtitle" id="mtitle"></h3>
+    <div class="mmetric" id="mmetric"></div>
+    <div class="mdemo" id="mdemo"></div>
+    <div class="mgrid">
+      <div>
+        <div class="mh">What I built</div>
+        <ul class="mbul" id="mbul"></ul>
+        <div class="mlink" id="mlink"></div>
+      </div>
+      <div>
+        <div class="mh">Tech stack</div>
+        <div class="mstack" id="mstack"></div>
       </div>
     </div>
   </div>
-
-  <footer>© 2025 Sujith Mondithoka · Hyderabad, India · Built with HTML &amp; CSS</footer>
-</main>
+</div>
 
 <script>
-function animateCounters(){
-  document.querySelectorAll('.counter').forEach(el=>{
-    const target=parseInt(el.dataset.target,10);
-    const dur=1600;const start=performance.now();
-    function tick(now){
-      const p=Math.min((now-start)/dur,1);
-      const ease=1-Math.pow(1-p,3);
-      const val=Math.floor(ease*target);
-      el.textContent=val>=1000?val.toLocaleString():val;
-      if(p<1)requestAnimationFrame(tick);
-      else el.textContent=target.toLocaleString();
-    }
-    requestAnimationFrame(tick);
-  });
-}
-const obs=new IntersectionObserver(entries=>{
-  if(entries[0].isIntersecting){animateCounters();obs.disconnect()}
-},{threshold:0.2});
-const sr=document.querySelector('.stats-row');
-if(sr)obs.observe(sr);
+(function(){
+"use strict";
+var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-const navLinks=document.querySelectorAll('.nav-link');
-const sections=document.querySelectorAll('section[id],div[id]');
-window.addEventListener('scroll',()=>{
-  let cur='';
-  sections.forEach(s=>{if(window.scrollY>=s.offsetTop-200)cur=s.id});
-  navLinks.forEach(a=>{
-    a.classList.toggle('active',a.getAttribute('href')==='#'+cur);
+/* ============ PRELOADER ============ */
+var loader = document.getElementById('loader');
+var pctEl = document.getElementById('pct');
+var barEl = document.getElementById('bar');
+var taskEl = document.getElementById('task');
+var tasks = ['clearing 50,000 transactions','compiling spring context','hydrating react tree','running SIT / UAT','ready'];
+function finishLoad(){
+  document.body.classList.add('ready');
+  loader.classList.add('done');
+  setTimeout(function(){ if(loader) loader.remove(); }, 900);
+}
+if(reduced){ document.body.classList.add('ready'); if(loader) loader.remove(); }
+else{
+  var lp = 0;
+  var liv = setInterval(function(){
+    lp += Math.random()*14 + 4;
+    if(lp >= 100){ lp = 100; clearInterval(liv); setTimeout(finishLoad, 260); }
+    pctEl.textContent = Math.floor(lp);
+    barEl.style.transform = 'scaleX(' + (lp/100) + ')';
+    taskEl.textContent = tasks[Math.min(Math.floor(lp/25), tasks.length-1)];
+  }, 130);
+}
+
+/* ============ HERO PARTICLES ============ */
+var canvas = document.getElementById('fieldc');
+var ctx = canvas.getContext('2d');
+var W, H, DPR, parts = [];
+var mouse = {x:-9999, y:-9999};
+function newPart(anywhere){
+  return {
+    x: anywhere ? Math.random()*W : -20,
+    y: H*0.12 + Math.random()*H*0.76,
+    v: .35 + Math.random()*1.15,
+    r: Math.random()*1.7 + .5,
+    o: .25 + Math.random()*.6,
+    gold: Math.random() < .12,
+    ph: Math.random()*Math.PI*2,
+    amp: 6 + Math.random()*18
+  };
+}
+function sizeField(){
+  DPR = Math.min(window.devicePixelRatio || 1, 1.5);
+  W = canvas.clientWidth; H = canvas.clientHeight;
+  canvas.width = W*DPR; canvas.height = H*DPR;
+  ctx.setTransform(DPR,0,0,DPR,0,0);
+  var count = Math.floor(Math.min(W*H/6500, 260));
+  parts = [];
+  for(var i=0;i<count;i++) parts.push(newPart(true));
+}
+function drawField(t){
+  ctx.clearRect(0,0,W,H);
+  ctx.globalCompositeOperation = 'lighter';
+  for(var i=0;i<parts.length;i++){
+    var pt = parts[i];
+    pt.x += pt.v;
+    var py = pt.y + Math.sin(t*0.0009 + pt.ph)*pt.amp;
+    var dx = pt.x - mouse.x, dy = py - mouse.y;
+    var d2 = dx*dx + dy*dy;
+    if(d2 < 16900){
+      var d = Math.sqrt(d2) || 1;
+      var f = (130-d)/130;
+      pt.x += (dx/d)*f*5; py += (dy/d)*f*14;
+    }
+    if(pt.x > W+24){ parts[i] = newPart(false); continue; }
+    var col = pt.gold ? '242,185,75' : '92,132,255';
+    ctx.beginPath();
+    ctx.fillStyle = 'rgba('+col+','+pt.o+')';
+    ctx.arc(pt.x, py, pt.r, 0, 6.2832);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.strokeStyle = 'rgba('+col+','+(pt.o*.35)+')';
+    ctx.lineWidth = pt.r*.9;
+    ctx.moveTo(pt.x-pt.v*7, py); ctx.lineTo(pt.x, py); ctx.stroke();
+  }
+  ctx.globalCompositeOperation = 'source-over';
+}
+sizeField();
+window.addEventListener('resize', sizeField);
+if(!reduced){
+  window.addEventListener('pointermove', function(e){
+    var r = canvas.getBoundingClientRect();
+    mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top;
   });
-},{passive:true});
+  (function loop(t){ drawField(t||0); requestAnimationFrame(loop); })(0);
+} else { drawField(0); }
+
+/* ============ SCRAMBLE ============ */
+var scrambleEl = document.getElementById('scramble');
+var phrases = ['React · TypeScript · Redux','Java · Spring Boot · JPA','Camunda BPMN · RabbitMQ','Open to work — India / remote'];
+var CHARS = '!<>-_\\/[]{}=+*^?#01';
+function scrambleTo(el, txt, done){
+  var frame = 0, queue = [];
+  var old = el.textContent || '';
+  var len = Math.max(old.length, txt.length);
+  for(var i=0;i<len;i++){
+    queue.push({from: old[i]||'', to: txt[i]||'', start: Math.floor(Math.random()*24), end: Math.floor(Math.random()*24)+24});
+  }
+  (function upd(){
+    var out = '', complete = 0;
+    for(var i=0;i<queue.length;i++){
+      var q = queue[i];
+      if(frame >= q.end){ complete++; out += q.to; }
+      else if(frame >= q.start){ out += CHARS[Math.floor(Math.random()*CHARS.length)]; }
+      else out += q.from;
+    }
+    el.textContent = out;
+    if(complete === queue.length){ if(done) done(); return; }
+    frame++; requestAnimationFrame(upd);
+  })();
+}
+if(scrambleEl){
+  if(reduced){ scrambleEl.textContent = phrases[0]; }
+  else{
+    var pi = 0;
+    (function cycle(){
+      scrambleTo(scrambleEl, phrases[pi], function(){ setTimeout(cycle, 2100); });
+      pi = (pi+1)%phrases.length;
+    })();
+  }
+}
+
+/* ============ REVEALS ============ */
+var io = new IntersectionObserver(function(es){
+  es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+},{threshold:.12, rootMargin:'0px 0px -6% 0px'});
+document.querySelectorAll('.rv').forEach(function(el){ io.observe(el); });
+
+/* ============ COUNT-UP ============ */
+function countUp(el){
+  var target = parseInt(el.getAttribute('data-count'),10);
+  var pre = el.getAttribute('data-prefix')||'';
+  var suf = el.getAttribute('data-suffix')||'';
+  if(reduced){ el.textContent = pre+target+suf; return; }
+  var start = null, dur = 1300;
+  (function step(ts){
+    if(!start) start = ts;
+    var p = Math.min((ts-start)/dur,1);
+    el.textContent = pre + Math.round(target*(1-Math.pow(1-p,3))) + suf;
+    if(p<1) requestAnimationFrame(step);
+  })(performance.now());
+}
+var sio = new IntersectionObserver(function(es){
+  es.forEach(function(e){
+    if(e.isIntersecting){ e.target.querySelectorAll('.n').forEach(countUp); sio.unobserve(e.target); }
+  });
+},{threshold:.4});
+var st = document.querySelector('.stats'); if(st) sio.observe(st);
+
+/* ============ LIVE COUNTERS INSIDE DEMOS ============ */
+var auditN = 49213, sessN = 299, cartN = 0;
+if(!reduced){
+  setInterval(function(){
+    auditN += Math.floor(Math.random()*3)+1;
+    if(auditN > 50000) auditN = 49213;
+    document.querySelectorAll('.j-audit').forEach(function(el){ el.textContent = auditN.toLocaleString('en-IN'); });
+  }, 700);
+  setInterval(function(){
+    sessN--; if(sessN < 288) sessN = 299;
+    var mm = Math.floor(sessN/60), ss = ('0'+(sessN%60)).slice(-2);
+    document.querySelectorAll('.j-sess').forEach(function(el){ el.textContent = mm+':'+ss; });
+  }, 1000);
+  setInterval(function(){
+    cartN = (cartN + 1) % 4;
+    document.querySelectorAll('.j-cart').forEach(function(el){ el.textContent = cartN; });
+  }, 8000);
+} else {
+  document.querySelectorAll('.j-audit').forEach(function(el){ el.textContent = '49,213'; });
+  document.querySelectorAll('.j-sess').forEach(function(el){ el.textContent = '4:59'; });
+}
+
+/* ============ SKILL SPOTLIGHT ============ */
+document.querySelectorAll('.scell').forEach(function(c){
+  c.addEventListener('pointermove', function(e){
+    var r = c.getBoundingClientRect();
+    c.style.setProperty('--mx',(e.clientX-r.left)+'px');
+    c.style.setProperty('--my',(e.clientY-r.top)+'px');
+  });
+});
+
+/* ============ MARQUEE ============ */
+var tr = document.getElementById('mqtrack');
+if(tr){ tr.innerHTML += tr.innerHTML; }
+
+/* ============ CASE STUDY MODAL ============ */
+var CASES = {
+  bizcard:{
+    kick:'Case study 01 · Standard Bank South Africa',
+    title:'Business Card — onboarding, end to end',
+    metric:'Card processing time cut by 60%',
+    bullets:[
+      'Built a <b>14-screen React onboarding application</b> with React Hook Form and dual-layer validation (client + server), keeping error states recoverable at every step.',
+      'Designed and built its <b>Spring Boot / Spring Data JPA / PostgreSQL backend</b> — full ownership of both sides of the feature.',
+      'Modelled the approval process as a <b>Camunda (BPMN) workflow</b>, so business rules live in the process engine, not scattered in code.',
+      'Result: corporate card processing time dropped by <b>60%</b>, shipped through full SIT/UAT release cycles.'
+    ],
+    stack:['React 18','TypeScript','React Hook Form','Redux','Spring Boot','Spring Data JPA','Camunda BPMN','PostgreSQL']
+  },
+  audit:{
+    kick:'Case study 02 · Standard Bank South Africa',
+    title:'Report Logs — the 50K/day audit engine',
+    metric:'50,000+ transactions/day · zero business logic touched',
+    bullets:[
+      'Built an <b>AOP-based audit system</b> using @Aspect pointcuts to intercept every download and email API call across the platform.',
+      'Persisted <b>50,000+ daily transactions to PostgreSQL</b> — with <b>zero changes to existing business logic</b>, the whole point of choosing AOP.',
+      'Powers <b>1,000+ monthly banking reports</b> generated through JasperReports for compliance and operations teams.',
+      'Cross-cutting concerns solved once, cleanly — instead of audit code duplicated through dozens of controllers.'
+    ],
+    stack:['Java 8','Spring AOP','AspectJ','Spring Boot','PostgreSQL','JasperReports']
+  },
+  dash:{
+    kick:'Case study 03 · Standard Bank South Africa',
+    title:'My Requests & Dashboard',
+    metric:'Lighthouse 62 → 88 · every application, one page',
+    bullets:[
+      'Designed and built the <b>My Requests page</b> — one view of every application a corporate client has filed (recalls, business cards and more), organised across <b>four tabs: Incomplete, Pending approval, Approved and Rejected</b>.',
+      'Consolidated <b>4+ fragmented modules</b> into this unified page and dashboard, raising Lighthouse from <b>62 to 88</b> (~35% faster) via code-splitting, React.lazy and selector memoization.',
+      'On submission and on approval by the <b>authorizer or delegate</b>, the beneficiary is automatically notified by <b>email and SMS</b> — backend triggers I built into the request lifecycle.',
+      'Built a <b>session-timeout modal</b> that warns clients at 5 minutes remaining with one-click <b>extend or logout</b> — no more silently expired banking sessions.'
+    ],
+    stack:['React 16','Redux','React.lazy','TypeScript','Spring Boot','Email / SMS triggers']
+  },
+  recall:{
+    kick:'Case study 04 · Standard Bank South Africa',
+    title:'Recall Transactions — branch to browser',
+    metric:'A branch-only process, fully digitised',
+    bullets:[
+      'Built a <b>7-screen accessible recall workflow</b> — multi-step React forms with navigation guards so users can\u2019t lose state mid-process.',
+      'Developed the <b>Spring Boot REST APIs with JPA / PostgreSQL</b> behind it, plus a Camunda process flow orchestrating the recall lifecycle.',
+      'Replaced a process that previously <b>required a physical branch visit</b> — corporate users now recall transactions entirely online.',
+      'Owned frontend and backend end to end, through SIT/UAT to production.'
+    ],
+    stack:['React','TypeScript','Spring Boot','Spring Data JPA','Camunda BPMN','PostgreSQL']
+  },
+  notif:{
+    kick:'Case study 05 · Standard Bank South Africa',
+    title:'Notifications — the nudge that finishes applications',
+    metric:'1-click deep-link resume · WCAG 2.1',
+    bullets:[
+      'Built the <b>frontend of the notification centre</b> — the bell icon every business client sees in the top bar after signing in to Service Online.',
+      'Clients get notified when <b>Service Online ships a new feature</b>, and when <b>they abandon an application midway</b> — say, two pages into a fourteen-page form.',
+      'Tapping an incomplete-application notification <b>deep-links straight back to the exact page where they stopped</b> — no hunting through menus, no restarting.',
+      'Delivered over the platform\u2019s <b>RabbitMQ event pipeline</b> (no polling), with <b>WCAG 2.1-compliant, role-based notification preferences</b>.'
+    ],
+    stack:['React','Redux','Deep linking','RabbitMQ (platform)','WCAG 2.1']
+  },
+  qkart:{
+    kick:'Case study 06 · Personal project',
+    title:'QKart — full-stack e-commerce SPA',
+    metric:'Re-renders cut ~40%',
+    bullets:[
+      'Complete e-commerce SPA — <b>authentication, product discovery, cart and checkout</b> over REST APIs.',
+      'Built with React, TypeScript, Redux and Material UI through <b>Crio.do\u2019s project track</b>.',
+      'Cut re-renders by <b>~40%</b> using custom hooks, Context API and memoization.',
+      'Unlike the banking work, this one is public — click through the live demo below.'
+    ],
+    stack:['React','TypeScript','Redux','Material UI','REST API'],
+    link:'https://qkart-frontend-by-sujith-8hi92kayg-sujiths-projects-289c4afb.vercel.app/'
+  }
+};
+
+var modal = document.getElementById('modal');
+var mback = document.getElementById('mback');
+var mcloseBtn = document.getElementById('mclose');
+var lastFocus = null;
+
+function openCase(key, card){
+  var c = CASES[key];
+  if(!c) return;
+  document.getElementById('mkick').textContent = c.kick;
+  document.getElementById('mtitle').textContent = c.title;
+  document.getElementById('mmetric').textContent = c.metric;
+  var bul = document.getElementById('mbul');
+  bul.innerHTML = '';
+  c.bullets.forEach(function(b){
+    var li = document.createElement('li'); li.innerHTML = b; bul.appendChild(li);
+  });
+  var stk = document.getElementById('mstack');
+  stk.innerHTML = '';
+  c.stack.forEach(function(s){
+    var sp = document.createElement('span'); sp.textContent = s; stk.appendChild(sp);
+  });
+  var lk = document.getElementById('mlink');
+  lk.innerHTML = '';
+  if(c.link){
+    var a = document.createElement('a');
+    a.className = 'btn'; a.href = c.link; a.target = '_blank'; a.rel = 'noopener';
+    a.innerHTML = '<i></i><s>Open live demo ↗</s>';
+    lk.appendChild(a);
+  }
+  var demo = document.getElementById('mdemo');
+  demo.innerHTML = '';
+  var clientEl = card.querySelector('.client');
+  if(clientEl) demo.appendChild(clientEl.cloneNode(true));
+  lastFocus = card;
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  mcloseBtn.focus();
+}
+function closeCase(){
+  modal.classList.remove('open');
+  document.body.style.overflow = '';
+  document.getElementById('mdemo').innerHTML = '';
+  if(lastFocus) lastFocus.focus();
+}
+document.querySelectorAll('[data-modal]').forEach(function(card){
+  card.addEventListener('click', function(){ openCase(card.getAttribute('data-modal'), card); });
+  card.addEventListener('keydown', function(e){
+    if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); openCase(card.getAttribute('data-modal'), card); }
+  });
+});
+mback.addEventListener('click', closeCase);
+mcloseBtn.addEventListener('click', closeCase);
+window.addEventListener('keydown', function(e){
+  if(e.key === 'Escape' && modal.classList.contains('open')) closeCase();
+});
+})();
 </script>
 </body>
 </html>
-
